@@ -108,6 +108,7 @@ in
   audioConfig = valveTree "deckard-audio-config" "20260914.1-1" "deckard-audio-config-20260914.1-1-any.pkg.tar.zst" "sha256-29bYQQscmnGN5ORaTOiodmUdqHiOdwP2ibue68rmF7U=";
   eeprom = valveTree "deckard-eeprom" "20260121.1-3" "deckard-eeprom-20260121.1-3-aarch64.pkg.tar.zst" "sha256-GkL+3twg0VGmeTp6GfgkBAeOsXTZgrbhDdqqZoPwmlQ=";
   hwSupportTree = valveTree "deckard-hw-support-tree" "20260911.1-1" "deckard-hw-support-20260911.1-1-aarch64.pkg.tar.zst" "sha256-rZmH1+NbOozBUghkn4juxu3By9LA5wD6MUiGdrQ/3Kg=";
+  splctl = valveTree "deckard-uboot-splctl" "20260128.3-1" "deckard-uboot-splctl-20260128.3-1-aarch64.pkg.tar.zst" "sha256-NDcgmQhMHL1Q/UcCLqSDICu3IGNxuOjLX5mO+2BibVY=";
 
   hwSupport = stdenv.mkDerivation {
     pname = "deckard-hw-support";

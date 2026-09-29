@@ -4,6 +4,9 @@
   rootUuid,
   ...
 }:
+let
+  valve = pkgs.callPackage ./valve.nix { };
+in
 {
   boot.loader.external = {
     enable = true;
@@ -57,6 +60,29 @@
       mv -fT -- "$stage/Image" /boot/Image
       mv -fT -- "$stage/initrd.uImage" /boot/initrd.uImage
       sync -f /boot
+    '';
+  };
+
+  systemd.services.frame-slot-good = {
+    wantedBy = [ "multi-user.target" ];
+    requires = [ "sshd.service" ];
+    after = [ "sshd.service" ];
+    unitConfig.ConditionKernelCommandLine = "rauc.slot=A";
+    path = [
+      valve.splctl
+      pkgs.util-linux
+    ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    script = ''
+      set -euo pipefail
+      cd /dev/disk/by-partlabel
+      trap 'blockdev --setro bootenv bootenvb' EXIT
+      blockdev --setrw bootenv bootenvb
+      splctl set-state A good
+      splctl get-boot-count A
     '';
   };
 }

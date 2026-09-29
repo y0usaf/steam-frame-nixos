@@ -1,6 +1,6 @@
 # steam-frame-nixos
 
-Runs NixOS with Valve's VR session (SteamVR, Steam, gamescope) on the Steam Frame, booted from internal slot A by Valve's U-Boot. It never writes the bootloader, firmware, U-Boot environment, battery or controller-radio firmware, or SteamOS on slot B.
+Runs NixOS with Valve's VR session (SteamVR, Steam, gamescope) on the Steam Frame, booted from internal slot A by Valve's U-Boot. It never writes the bootloader, firmware, U-Boot environment, battery or controller-radio firmware, or SteamOS on slot B. Its only write to boot state marks slot A good after each boot, as SteamOS does for its own slot.
 
 This is a spike. The original slot-A layout was verified on one Frame on 2026-09-28; booting the shared-pool layout was verified on the same Frame on 2026-09-29.
 
@@ -58,6 +58,8 @@ Building aarch64 on x86_64 needs qemu binfmt: `sudo tools/binfmt.sh`.
 - `tools/write-slotA.sh` then writes slot A over SSH from SteamOS. It refuses unless SteamOS booted from slot B, and it needs passwordless sudo for `steamos` there.
 
 Deployment uses `boot.loader.external` to update slot A's `Image`, DTBs and `initrd.uImage` through `/boot`. The hook checks the boot filesystem UUID and stages the files on that filesystem before replacing the active paths.
+
+Valve's loader counts `BOOT_COUNT_A` down on every normal boot and treats slot A as bad at zero. Once `sshd` is up, `frame-slot-good.service` runs Valve's `splctl set-state A good`, the call SteamOS's `steamos-boot.service` makes for its own slot, and logs the remaining count. That sets `BOOT_STATE_A=1`, and the next boot resets the count to 8 before taking one attempt: on 2026-09-29 a reboot took it from 5 to 7. Only the `bootenv` and `bootenvb` partitions are made writable, and only for that call.
 
 To boot NixOS, hold Power until the LED goes off, then power on while holding AUX and choose "Previous". A normal power-on selects SteamOS on slot B, subject to its home mount configuration described above.
 
