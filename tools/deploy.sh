@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 . "$(dirname "$0")/lib.sh"
+uuid=$(nix eval --raw "path:$repo#nixosConfigurations.frame.config.frame.storage.poolUuid")
+if ! frame "[ \"\$(findmnt -n -o UUID --target /)\" = \"$uuid\" ] && [ \"\$(findmnt -n -o FSROOT --target /)\" = /@root ]"; then
+  echo "Frame deployment requires the shared Btrfs root; refusing to replace the slot-A recovery profile." >&2
+  exit 1
+fi
 t=$(build nixosConfigurations.frame.config.system.build.toplevel)
 NIX_SSHOPTS=$ssh_opts nix copy --no-check-sigs --to "ssh-ng://root@$host" "$t"
 frame "set -e

@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   valve = pkgs.callPackage ./valve.nix { };
   mesavars = "${valve.steamvrSession}/share/deckard/mesavars.sh";
@@ -244,20 +249,44 @@ let
 in
 {
   users.groups = lib.genAttrs deviceGroups (_: { });
-  fileSystems."/mnt/steamos-data" = {
-    device = "/dev/disk/by-uuid/4bac5c02-4a89-4377-8388-ce55ef171552";
-    fsType = "ext4";
-    neededForBoot = true;
-    options = [ "noatime" ];
-  };
+  fileSystems."/mnt/steamos-data" =
+    if config.frame.storage.poolUuid == null then
+      {
+        device = "/dev/disk/by-uuid/4bac5c02-4a89-4377-8388-ce55ef171552";
+        fsType = "ext4";
+        neededForBoot = true;
+        options = [ "noatime" ];
+      }
+    else
+      {
+        device = "/dev/disk/by-uuid/${config.frame.storage.poolUuid}";
+        fsType = "btrfs";
+        options = [
+          "subvol=@steamos-data"
+          "compress=zstd:3"
+          "noatime"
+        ];
+      };
 
-  fileSystems."/home/steamos" = {
+  fileSystems."/home/steamos" = lib.mkIf (config.frame.storage.poolUuid == null) {
     device = "/mnt/steamos-data/nixos-home/steamos";
     fsType = "none";
     neededForBoot = true;
     depends = [ "/mnt/steamos-data" ];
     options = [ "bind" ];
   };
+
+  fileSystems."/home/steamos/.local/share/Steam/steamapps" =
+    lib.mkIf (config.frame.storage.poolUuid != null)
+      {
+        device = "/games";
+        fsType = "none";
+        depends = [
+          "/home"
+          "/games"
+        ];
+        options = [ "bind" ];
+      };
 
   users.users.steamos = {
     isNormalUser = true;
@@ -364,7 +393,8 @@ in
   systemd.tmpfiles.rules = [
     "f /run/deckardcharger/vr_state 0644 steamos root - Not running"
     "d /tmp/.X11-unix 1777 steamos root 10d"
-  ];
+  ]
+  ++ lib.optional (config.frame.storage.poolUuid != null) "d /games 0755 steamos users -";
 
   boot.extraModulePackages = [ valve.v4l2loopback ];
   boot.kernelModules = [ "v4l2loopback" ];

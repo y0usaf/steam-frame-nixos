@@ -9,7 +9,7 @@
   ubootTools,
   zstd,
   nixos,
-  rootUuid,
+  bootUuid,
 }:
 let
   inherit (nixos.config.system.build) toplevel initialRamdisk;
@@ -44,7 +44,7 @@ runCommand "frame-nixos-usb"
 
     rootBytes=$((10485760 * 512))
     truncate -s $rootBytes rootfs.img
-    unshare --map-root-user mkfs.btrfs -q -f -M -n 4096 -O ^block-group-tree -L rootfs-A -U ${rootUuid} --shrink --rootdir $root rootfs.img
+    unshare --map-root-user mkfs.btrfs -q -f -M -n 4096 -O ^block-group-tree -L rootfs-A -U ${bootUuid} --shrink --rootdir $root rootfs.img
     test "$(stat -c %s rootfs.img)" -le $rootBytes
     test "$(btrfs inspect-internal dump-super rootfs.img | awk '$1 == "total_bytes" { print $2 }')" -le $rootBytes
 
