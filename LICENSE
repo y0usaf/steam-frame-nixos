@@ -1,0 +1,37 @@
+steam-frame-nixos License
+
+Copyright (C) 2026 y0usaf
+Originally created by y0usaf: https://github.com/y0usaf/steam-frame-nixos
+
+"This work" is this repository, except the material that NOTICE says it does
+not cover.
+
+1. Permission. Subject to sections 2 to 4, y0usaf gives every person who
+   obtains a copy of this work, free of charge, permission to use, copy,
+   modify and distribute it, in source or built form. Each recipient gets this
+   permission directly from y0usaf and may not sublicense it.
+
+2. Excluded use. No permission is given to use this work, or any work derived
+   from it, in, for or as part of Jovian NixOS (Jovian-NixOS,
+   https://github.com/Jovian-Experiments/Jovian-NixOS) or any fork, mirror,
+   successor or derivative of it. That includes copying, adapting, porting or
+   merging any part of this work into it, contributing any part of this work
+   to it, distributing this work with it, and knowingly giving this work to
+   anyone for those purposes.
+
+3. Conditions. You may distribute this work or a modified version only if you:
+   (a) keep this file and NOTICE, with the copyright line and the "Originally
+       created by" line;
+   (b) distribute it under this license, section 2 included, and add no terms
+       that weaken any of it;
+   (c) do not misrepresent its origin, and mark a modified version as
+       different from the original.
+
+4. Ending. If you break section 2 or 3, your permission ends automatically.
+
+5. No warranty. THIS WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+   NO EVENT SHALL y0usaf BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+   WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
+   OR IN CONNECTION WITH THIS WORK OR THE USE OR OTHER DEALINGS IN IT.

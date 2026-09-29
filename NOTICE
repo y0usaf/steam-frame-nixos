@@ -1,0 +1,7 @@
+steam-frame-nixos
+
+The license is in LICENSE.
+
+Not covered by it: Valve's software and files (including the gitignored
+valve/) and Nixpkgs. They are not part of this work and keep their own
+licenses.
