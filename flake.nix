@@ -15,6 +15,7 @@
           ./hardware.nix
           ./session.nix
           ./audio.nix
+          ./wivrn.nix
         ];
       };
       frame = slotA.extendModules {

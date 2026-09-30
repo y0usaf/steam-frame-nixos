@@ -274,6 +274,8 @@ let
   ];
 in
 {
+  _module.args.frameSession = { inherit inFhs valveMesaEnv mesavars; };
+
   users.groups = lib.genAttrs deviceGroups (_: { });
   fileSystems."/mnt/steamos-data" =
     if config.frame.storage.poolUuid == null then
