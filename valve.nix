@@ -100,7 +100,6 @@ in
     url = "${repo}/spirv-tools-1%3A1.4.309.0-4-aarch64.pkg.tar.zst";
     hash = "sha256-VFgGK9Lh6QoDj5ArewuBYROZaYw60W70YEyejR7cv/4=";
   });
-  vulkanLoader = valveTree "vulkan-icd-loader-holo" "1.4.309.0-4" "vulkan-icd-loader-1.4.309.0-4-aarch64.pkg.tar.zst" "sha256-+hZoQs8K4u5hvcbWXLBvDceG5cgicu4MiVXz0RFVOEc=";
   mesa = valveTree "deckard-mesa" "26.3.0-devel-8aa73b4b" "deckard-mesa-linux-aarch64-26.3.0_devel+git8aa73b4b-1-aarch64.pkg.tar.zst" "sha256-uPmLPbV+1Frv0GsrVA3ItnqGx4Q0VmH5rsOdnF37920=";
   vulkanLayers = valveTree "deckard-vulkan-layers" "20260914.1-1" "deckard-vulkan-layers-linux-aarch64-20260914.1-1-aarch64.pkg.tar.zst" "sha256-BdN/sh78kfYkU7BSzyfZsX4feD98KffT8SsURQg5nLo=";
   fpga = valveTree "deckard-fpga" "20250924.1-1" "deckard-fpga-20250924.1-1-aarch64.pkg.tar.zst" "sha256-tses6YB9SqRjcddxHk+ti4UbFoA+sDEahR85lCdWj9U=";
