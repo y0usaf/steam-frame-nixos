@@ -93,9 +93,10 @@ let
         xorg.xhost
         xorg.xrdb
         xorg.xset
-        v4l-utils
+        (v4l-utils.override { withGUI = false; })
         mangohud
         xdg-utils
+        firefox
         tbb
         curl
         wireplumber
@@ -173,7 +174,10 @@ let
       "--ro-bind ${valve.steamvr}/opt/steamvr /opt/steamvr"
       "--bind /tmp/.X11-unix /tmp/.X11-unix"
     ];
-    extraBuildCommands = "ln -sfn ${valve.hwSupportTree}/local $out/usr/local";
+    extraBuildCommands = ''
+      ln -sfn ${valve.hwSupportTree}/local $out/usr/local
+      rm $out/usr/share/applications/org.freedesktop.IBus.Setup.desktop
+    '';
     profile = "export PATH=/usr/local/bin:/usr/local/sbin:$PATH";
     unshareUser = false;
     unshareIpc = false;
