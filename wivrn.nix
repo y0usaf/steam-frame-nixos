@@ -5,14 +5,7 @@
   ...
 }:
 let
-  rev = "754ba4f6e128fb68b47f052422323b41f033f4a0";
-
-  src = pkgs.fetchFromGitHub {
-    owner = "WiVRn";
-    repo = "WiVRn";
-    inherit rev;
-    hash = "sha256-yihpaMIhGe+UZwPgPFPk0Y5LYCAAPVN9kLWyJB6XORU=";
-  };
+  inherit (pkgs.wivrn) src version;
 
   archives = {
     simdjson = {
@@ -84,8 +77,7 @@ let
 
   wivrn = pkgs.stdenv.mkDerivation {
     pname = "wivrn-client";
-    version = builtins.substring 0 7 rev;
-    inherit src;
+    inherit version src;
     strictDeps = true;
 
     nativeBuildInputs = with pkgs; [
@@ -120,8 +112,7 @@ let
       (lib.cmakeBool "WIVRN_BUILD_SERVER" false)
       (lib.cmakeBool "WIVRN_BUILD_WIVRNCTL" false)
       (lib.cmakeBool "FETCHCONTENT_FULLY_DISCONNECTED" true)
-      (lib.cmakeFeature "GIT_DESC" (builtins.substring 0 7 rev))
-      (lib.cmakeFeature "GIT_COMMIT" rev)
+      (lib.cmakeFeature "GIT_TAG" src.rev)
     ]
     ++ lib.mapAttrsToList (
       name: dep: lib.cmakeFeature "FETCHCONTENT_SOURCE_DIR_${lib.toUpper name}" "${dep}"

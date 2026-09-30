@@ -78,6 +78,16 @@ To boot NixOS, hold Power until the LED goes off, then power on while holding AU
 - **Not verified:** how it looks in the headset, shortcut keys (headset input is a pointer and a virtual keyboard), theme switching, audio, Bluetooth and power actions, and a clean stop of the deployed unit.
 - **Unavailable:** screen recording (`gpu-screen-recorder` is not installed and `~/Videos` does not exist), the screensaver (`ttfx` is not installed) and the lock screen (`/etc/pam.d/omarchy-lock-password` does not exist, so it refuses to lock). The idle timers for the last two do nothing.
 
+## WiVRn
+
+`wivrn.nix` builds the WiVRn client from nixpkgs' WiVRn source, so it matches the server in `packages.x86_64-linux.wivrn-server`: WiVRn 26.9 at the current nixpkgs pin. A client refuses any server with a different protocol, and the protocol changes between WiVRn releases.
+
+- Steam's + menu lists it as WiVRn, and `systemctl --user start wivrn-client` starts it over SSH.
+- On the PC, run `nix run path:.#wivrn-server -- --no-publish-service` and accept TCP and UDP 9757. The flag skips avahi, so add the PC in the headset's WiVRn lobby with "Add server", its IP and port 9757.
+- The first connection asks for the PIN the server prints at startup.
+- **Verified:** on the Frame, Steam's FHS has the WiVRn entry and the 26.9 client with no missing libraries, and the PC's port 9757 is reachable from the Frame.
+- **Not verified:** pairing, a connection and streaming.
+
 ## License
 
 [LICENSE](LICENSE) lets anyone use, copy, modify and distribute this with credit, except in or for one named project. It is not an open-source license. [NOTICE](NOTICE) lists the third-party parts it does not cover.

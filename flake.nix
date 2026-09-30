@@ -51,6 +51,7 @@
           inherit bootUuid;
           nixos = recovery;
         };
+        wivrn-server = nixpkgs.legacyPackages.x86_64-linux.wivrn;
       };
     };
 }
