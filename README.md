@@ -4,10 +4,9 @@ Runs NixOS with Valve's VR session (SteamVR, Steam, gamescope) on the Steam Fram
 
 This is a spike. The original slot-A layout was verified on one Frame on 2026-09-28; booting the shared-pool layout was verified on the same Frame on 2026-09-29.
 
-- **Works:** unattended boot, Wi-Fi through NetworkManager with the MAC from the EEPROM (as on SteamOS), SSH, charging, fan, LEDs, inside-out tracking, controllers, SteamVR direct mode, the SteamVR dashboard, and Steam login in the headset.
+- **Works:** unattended boot, Wi-Fi through NetworkManager with the MAC from the EEPROM (as on SteamOS), SSH, charging, fan, LEDs, inside-out tracking, controllers, the speakers with Valve's calibration and EQ, SteamVR direct mode, the SteamVR dashboard, and Steam login in the headset.
 - **Not yet verified:** games, suspend.
 - **Not verified yet:** Steam's Wi-Fi toggle and network settings.
-- **Muted:** the speakers, until Valve's speaker calibration is wired in.
 
 ## Not in this repo
 
