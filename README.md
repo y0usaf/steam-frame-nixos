@@ -65,6 +65,19 @@ Valve's loader counts `BOOT_COUNT_A` down on every normal boot and treats slot A
 
 To boot NixOS, hold Power until the LED goes off, then power on while holding AUX and choose "Previous". A normal power-on selects SteamOS on slot B, subject to its home mount configuration described above.
 
+## Omarchy
+
+`omarchy.nix` runs the desktop layer of [Omarchy](https://github.com/basecamp/omarchy) 4.0.4 (Hyprland and its QuickShell shell) as a window over SteamVR. It is not the Arch ISO, and it is not part of the default session: nothing starts it at boot and the VR session runs without it.
+
+- `systemctl --user start omarchy` and `systemctl --user stop omarchy`, over SSH. It is a SteamVR overlay, so it is not in the library list. It stops whenever SteamVR restarts and stays stopped until started again.
+- A nested Hyprland runs as a client of a second gamescope (`--backend openvr --expose-wayland`). Aquamarine needs the three fixes in `omarchy/aquamarine-gamescope.patch`.
+- `ExecStopPost` removes what Hyprland and Quickshell leave in `$XDG_RUNTIME_DIR`. Omarchy's own state stays in the real home (`~/.config/omarchy`, `~/.local/state/omarchy`, `~/.cache`).
+- Omarchy's menu actions for power, audio, Wi-Fi and Bluetooth act on the host's services, not on the overlay.
+- The bar reads Wi-Fi from NetworkManager over D-Bus. Quickshell 0.3.1 ignores a saved profile without `mode=infrastructure`, so `tools/wifi-from-nm.py` writes it.
+- **Verified:** on the Frame, Hyprland nested in gamescope draws the bar, wallpaper, menu and a foot terminal on the GPU (screenshots taken inside Hyprland). As an overlay on the live SteamVR session it starts, the bar shows the Wi-Fi state, and one 15-minute run had no crash or error.
+- **Not verified:** how it looks in the headset, shortcut keys (headset input is a pointer and a virtual keyboard), theme switching, audio, Bluetooth and power actions, and a clean stop of the deployed unit.
+- **Unavailable:** screen recording (`gpu-screen-recorder` is not installed and `~/Videos` does not exist), the screensaver (`ttfx` is not installed) and the lock screen (`/etc/pam.d/omarchy-lock-password` does not exist, so it refuses to lock). The idle timers for the last two do nothing.
+
 ## License
 
 [LICENSE](LICENSE) lets anyone use, copy, modify and distribute this with credit, except in or for one named project. It is not an open-source license. [NOTICE](NOTICE) lists the third-party parts it does not cover.

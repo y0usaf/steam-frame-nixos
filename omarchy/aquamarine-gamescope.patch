@@ -1,0 +1,45 @@
+diff --git a/src/backend/Wayland.cpp b/src/backend/Wayland.cpp
+index 8905adc..c6de7cc 100644
+--- a/src/backend/Wayland.cpp
++++ b/src/backend/Wayland.cpp
+@@ -122,11 +122,11 @@ bool Aquamarine::CWaylandBackend::start() {
+             initSeat();
+         } else if (NAME == "xdg_wm_base") {
+             TRACE(backend->log(AQ_LOG_TRACE, std::format("  > binding to global: {} (version {}) with id {}", name, 6, id)));
+-            waylandState.xdg = makeShared<CCXdgWmBase>((wl_proxy*)wl_registry_bind((wl_registry*)waylandState.registry->resource(), id, &xdg_wm_base_interface, 6));
++            waylandState.xdg = makeShared<CCXdgWmBase>((wl_proxy*)wl_registry_bind((wl_registry*)waylandState.registry->resource(), id, &xdg_wm_base_interface, std::min(version, 6u)));
+             initShell();
+         } else if (NAME == "wl_compositor") {
+             TRACE(backend->log(AQ_LOG_TRACE, std::format("  > binding to global: {} (version {}) with id {}", name, 6, id)));
+-            waylandState.compositor = makeShared<CCWlCompositor>((wl_proxy*)wl_registry_bind((wl_registry*)waylandState.registry->resource(), id, &wl_compositor_interface, 6));
++            waylandState.compositor = makeShared<CCWlCompositor>((wl_proxy*)wl_registry_bind((wl_registry*)waylandState.registry->resource(), id, &wl_compositor_interface, std::min(version, 6u)));
+         } else if (NAME == "wl_shm") {
+             TRACE(backend->log(AQ_LOG_TRACE, std::format("  > binding to global: {} (version {}) with id {}", name, 1, id)));
+             waylandState.shm = makeShared<CCWlShm>((wl_proxy*)wl_registry_bind((wl_registry*)waylandState.registry->resource(), id, &wl_shm_interface, 1));
+@@ -541,9 +541,14 @@ Aquamarine::CWaylandOutput::CWaylandOutput(const std::string& name_, Hyprutils::
+     waylandState.xdgToplevel->setConfigure([this](CCXdgToplevel* r, int32_t w, int32_t h, wl_array* arr) {
+         backend->backend->log(AQ_LOG_DEBUG, std::format("Output {}: configure toplevel with {}x{}", name, w, h));
+         if (w == 0 || h == 0) {
+-            backend->backend->log(AQ_LOG_DEBUG, std::format("Output {}: w/h is 0, sending default hardcoded 1280x720", name));
+-            w = 1280;
+-            h = 720;
++            if (waylandState.surfaceSize.x > 0 && waylandState.surfaceSize.y > 0) {
++                w = waylandState.surfaceSize.x;
++                h = waylandState.surfaceSize.y;
++            } else {
++                backend->backend->log(AQ_LOG_DEBUG, std::format("Output {}: w/h is 0, sending default hardcoded 1280x720", name));
++                w = 1280;
++                h = 720;
++            }
+         }
+         events.state.emit(SStateEvent{.size = {w, h}});
+         // Kick off the first frame synchronously: the consumer expects events.frame in
+@@ -567,6 +572,8 @@ Aquamarine::CWaylandOutput::CWaylandOutput(const std::string& name_, Hyprutils::
+ 
+     inputRegion->sendDestroy();
+ 
++    wl_display_flush(backend->waylandState.display);
++
+     backend->backend->log(AQ_LOG_DEBUG, std::format("Output {}: initialized", name));
+ }
+ 

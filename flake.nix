@@ -16,6 +16,7 @@
           ./session.nix
           ./audio.nix
           ./wivrn.nix
+          ./omarchy.nix
         ];
       };
       frame = slotA.extendModules {
