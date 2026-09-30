@@ -135,9 +135,21 @@ let
       patchelf --set-rpath "$(patchelf --print-rpath $out/bin/wivrn | tr : '\n' | grep -vF ${pkgs.vulkan-loader}/ | paste -sd:)" $out/bin/wivrn
     '';
   };
+
+  desktopItem = pkgs.makeDesktopItem {
+    name = "wivrn";
+    desktopName = "WiVRn";
+    exec = "wivrn";
+    icon = "${src}/images/wivrn.svg";
+  };
 in
 {
   system.build.wivrnClient = wivrn;
+
+  frame.session.fhsPackages = [
+    wivrn
+    desktopItem
+  ];
 
   systemd.user.services.wivrn-client = {
     description = "WiVRn client";

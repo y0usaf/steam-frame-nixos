@@ -55,6 +55,7 @@ let
         valve.eeprom
         valve.fpga
       ]
+      ++ config.frame.session.fhsPackages
       ++ (with p; [
         SDL2
         libuuid
@@ -274,6 +275,16 @@ let
   ];
 in
 {
+  imports = [
+    {
+      options.frame.session.fhsPackages = lib.mkOption {
+        type = lib.types.listOf lib.types.package;
+        default = [ ];
+        description = "Extra packages for the FHS environment Steam runs in. Their desktop entries appear in Steam's + menu.";
+      };
+    }
+  ];
+
   _module.args.frameSession = { inherit inFhs valveMesaEnv mesavars; };
 
   users.groups = lib.genAttrs deviceGroups (_: { });
