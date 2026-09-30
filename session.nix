@@ -544,7 +544,10 @@ in
       ExecStart = inFhs "/usr/share/deckard/select_steamvr.sh bin/linuxarm64/vrcmd --background --waitforquit";
       ExecStartPost = "-${pkgs.bash}/bin/sh -c 'echo Running > /run/deckardcharger/vr_state'";
       ExecStop = inFhs "/usr/share/deckard/select_steamvr.sh bin/linuxarm64/vrstartup -shutdown";
-      ExecStopPost = "-${pkgs.bash}/bin/sh -c 'echo \"Not running\" > /run/deckardcharger/vr_state'";
+      ExecStopPost = [
+        (inFhs "/usr/bin/displays_turn_off_drm_master")
+        "-${pkgs.bash}/bin/sh -c 'echo \"Not running\" > /run/deckardcharger/vr_state'"
+      ];
     };
   };
 
