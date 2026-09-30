@@ -402,6 +402,11 @@ in
     options v4l2loopback video_nr=99 card_label="SteamVR" exclusive_caps=1
   '';
 
+  systemd.network.links."80-wlan" = {
+    matchConfig.Type = "wlan";
+    linkConfig.NamePolicy = "keep kernel";
+  };
+
   systemd.services.set-wifi-mac-address = {
     description = "Set Wi-Fi MAC address from the EEPROM";
     after = [ "sys-subsystem-net-devices-wlan0.device" ];
@@ -412,6 +417,7 @@ in
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
+      TimeoutStartSec = "30s";
       ExecStart = inFhs "/usr/lib/deckard-hw-support/set_mac_addresses.sh --wifi";
     };
   };
