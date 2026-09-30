@@ -63,42 +63,6 @@ in
         ExecStart = "${pkgs.btrfs-progs}/bin/btrfs filesystem resize max /sysroot";
       };
     };
-    boot.initrd.systemd.services.frame-recover-boot = lib.mkIf sharedPool {
-      wantedBy = [ "emergency.target" ];
-      before = [
-        "emergency.service"
-        "panic-on-fail.service"
-      ];
-      unitConfig.DefaultDependencies = false;
-      path = [
-        pkgs.coreutils
-        pkgs.util-linux
-      ];
-      serviceConfig = {
-        Type = "oneshot";
-        TimeoutStartSec = "60s";
-      };
-      script = ''
-        set -euo pipefail
-        mountpoint=/run/frame-recovery
-        mkdir -p "$mountpoint"
-        mount -t btrfs -o rw,subvolid=5 /dev/disk/by-uuid/${rootUuid} "$mountpoint"
-        boot="$mountpoint/boot"
-        trap 'rm -f "$boot"/Image.recovery "$boot"/maindtb.dtb.recovery "$boot"/initrd.uImage.recovery; umount "$mountpoint"' EXIT
-        for file in Image maindtb.dtb initrd.uImage; do
-          test -s "$boot/recovery/$file"
-        done
-        cp -a "$boot/recovery/dtbqcom/." "$boot/dtbqcom/"
-        for file in Image maindtb.dtb initrd.uImage; do
-          cp "$boot/recovery/$file" "$boot/$file.recovery"
-          mv -f "$boot/$file.recovery" "$boot/$file"
-        done
-        sync -f "$boot"
-        umount "$mountpoint"
-        trap - EXIT
-        ${config.boot.initrd.systemd.package}/bin/systemctl --force reboot
-      '';
-    };
     boot.initrd.services.udev.rules = ''
       ACTION=="add", SUBSYSTEM=="leds", KERNEL=="rgb:status", ATTR{multi_intensity}="0 0 255", ATTR{brightness}="80"
     '';

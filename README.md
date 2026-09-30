@@ -43,9 +43,11 @@ Slot A remains the boot carrier. Its top-level filesystem mounts at `/mnt/frame-
 - `nixosConfigurations.frame-recovery` is a minimal slot-A system with Wi-Fi, root SSH and migration tools. Its root and home are local to slot A, so it can start while the shared pool is unavailable.
 - `packages.x86_64-linux.image` contains `frame-slotA`; `packages.x86_64-linux.recovery-image` contains `frame-recovery`. Both format their root image with the fixed slot-A UUID, independently of the pool UUID.
 
-The slot-A recovery system profile and the pool's system profile must remain separate. The pool initrd includes an emergency service that restores staged recovery boot assets from slot A's `/boot/recovery` and reboots. Recovery assets and the independent slot-A system profile must be installed before attempting the pool boot; this fallback has not yet been verified on the Frame.
+The slot-A recovery system profile and the pool's system profile must remain separate. Recovery assets and the independent slot-A system profile must be installed before attempting the pool boot.
 
-The fallback covers initrd emergencies. It cannot repair failures before the initrd starts, hangs or later session failures. Boot-file replacement updates each file individually; an interrupted update that changes the kernel can leave an incompatible kernel and initrd.
+The pool initrd falls back to recovery in two cases: when it reaches `emergency.target`, for example because the pool will not mount, and on the fourth consecutive pool boot that `frame-slot-good.service` has not marked good. `frame-boot-swap recovery` saves the active boot files to `/boot/pool` and installs `/boot/recovery`, then the initrd reboots; the emergency path reboots even if the swap fails. From recovery, `frame-boot-swap pool && systemctl reboot` restores the pool's files. Both triggers and the way back were verified on the Frame on 2026-09-29.
+
+The fallback cannot help when the kernel or initrd fails before the initrd runs, or when recovery itself fails; Valve's loader then falls back to slot B once its counter runs out. Boot-file replacement updates each file individually; an interrupted update that changes the kernel can leave an incompatible kernel and initrd.
 
 Stock SteamOS on slot B still specifies an ext4 home filesystem in its fstab. That configuration has not been patched for Btrfs, so converting `/dev/sda8` requires updating SteamOS's mount configuration before its normal home mount can work.
 
@@ -54,6 +56,7 @@ Stock SteamOS on slot B still specifies an ext4 home filesystem in its fstab. Th
 Building aarch64 on x86_64 needs qemu binfmt: `sudo tools/binfmt.sh`.
 
 - `tools/deploy.sh` builds `frame`, copies and switches a running shared-pool Frame at `FRAME_HOST`, then prints the system path. Initial migration must register the pool's system profile separately from the slot-A recovery profile.
+- To update the recovery system, build `nixosConfigurations.frame-recovery`, copy it into slot A's store with `nix copy --to "ssh-ng://root@$FRAME_HOST?remote-store=local%3Froot%3D%2Fmnt%2Fframe-boot"`, then run `nix-env --store /mnt/frame-boot -p /mnt/frame-boot/nix/var/nix/profiles/<profile> --set <path>` on the Frame for `frame-recovery` and `system`. `/boot/recovery` needs new files only if the recovery kernel or initrd changed.
 - `tools/stage-slotA.sh <nm-connection>` builds the image and injects Wi-Fi.
 - `tools/write-slotA.sh` then writes slot A over SSH from SteamOS. It refuses unless SteamOS booted from slot B, and it needs passwordless sudo for `steamos` there.
 
