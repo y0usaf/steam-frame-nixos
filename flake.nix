@@ -16,6 +16,7 @@
           ./session.nix
           ./audio.nix
           ./wivrn.nix
+          ./stremio.nix
           ./omarchy.nix
         ];
       };
