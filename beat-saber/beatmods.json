@@ -1,0 +1,1015 @@
+{
+  "gameVersion": "1.44.1",
+  "mods": {
+    "AdBlocker": {
+      "depends": [
+        "BSIPA"
+      ],
+      "hash": "sha256-DuKYVjdg2Mf2unyBNJgvnRwuVU/hQmSKNGUFGsZGhIc=",
+      "url": "https://beatmods.com/cdn/mod/cd397e93b1a03f163534483462edf768.zip",
+      "version": "1.0.5"
+    },
+    "AssetBundleLoadingTools": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil",
+        "System.IO.Compression",
+        "System.IO.Compression.FileSystem"
+      ],
+      "hash": "sha256-NWsapHIuzKbxMZmtN4Qp7OmHPDZdnPAT4JX9XAdXoSc=",
+      "url": "https://beatmods.com/cdn/mod/a381a964cb69d26be8348edf04fabbc7.zip",
+      "version": "1.1.13"
+    },
+    "BS Utils": {
+      "depends": [
+        "BSIPA",
+        "Ini Parser"
+      ],
+      "hash": "sha256-tFD6RWHaW1rYNKPc9vEnwtc+X5capsmGUUprGF1o7f4=",
+      "url": "https://beatmods.com/cdn/mod/918d13ac2821a3a17b2819f8861453e9.zip",
+      "version": "1.14.3"
+    },
+    "BSAssetLib": {
+      "depends": [
+        "BSIPA",
+        "SiraUtil"
+      ],
+      "hash": "sha256-lZ7FhGlkc/D9dNyjlVarOxFHqEISCa3c7jseTXmRc/A=",
+      "url": "https://beatmods.com/cdn/mod/274b207ecffd1f91555f84e7597e7a84.zip",
+      "version": "1.0.2"
+    },
+    "BSIPA": {
+      "depends": [],
+      "hash": "sha256-iZuKHdqRk1vVwZohH6SOROMve+mrgrb8eWcJx1O3srw=",
+      "url": "https://beatmods.com/cdn/mod/947774ef1010ff809ae05e345e269a90.zip",
+      "version": "4.3.7"
+    },
+    "BeatSaberMarkupLanguage": {
+      "depends": [
+        "BSIPA"
+      ],
+      "hash": "sha256-gWYTRZhTlV4rfAISPtQvjlvb2UbMd0/V/MToCmoJEgo=",
+      "url": "https://beatmods.com/cdn/mod/46149d03f8549e07f2c88fefde4337b2.zip",
+      "version": "1.14.1"
+    },
+    "BeatSaberPlaylistsLib": {
+      "depends": [
+        "BSIPA",
+        "ImageSharp",
+        "SongCore",
+        "System.IO.Compression"
+      ],
+      "hash": "sha256-37Js+Qy3ODTEBXJ0GMASHYVGytBAOr01oJQ32rdmvTI=",
+      "url": "https://beatmods.com/cdn/mod/a3418b75ed7294a3856f3eca12bbd672.zip",
+      "version": "1.7.2"
+    },
+    "BeatSaverDownloader": {
+      "depends": [
+        "BS Utils",
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "BeatSaverSharp",
+        "ScoreSaberSharp",
+        "SongCore",
+        "System.IO.Compression.FileSystem"
+      ],
+      "hash": "sha256-QQixHq4R0J+MToON3h3DYQjx8/1P/zG5UefFUfpZ9fE=",
+      "url": "https://beatmods.com/cdn/mod/a740c6e68a9b5d1dfda3cc8e81f7cf06.zip",
+      "version": "6.0.7"
+    },
+    "BeatSaverSharp": {
+      "depends": [],
+      "hash": "sha256-9fN7J0OOmy+h2fvfUaTwFfRK4El5y92bkPauGFg6aRE=",
+      "url": "https://beatmods.com/cdn/mod/be37e13e93d9ac7da4efbdc3f514fa8f.zip",
+      "version": "3.4.5"
+    },
+    "BeatSaverUpdater": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "BeatSaverSharp",
+        "SiraUtil",
+        "SongCore"
+      ],
+      "hash": "sha256-YjfaBcvAROmSEcsOVpyRf+YbsNol5CxhptQ4NxVI67o=",
+      "url": "https://beatmods.com/cdn/mod/d9ea8dd0cbaac66cbb02fa59a548e42b.zip",
+      "version": "1.2.11"
+    },
+    "BeatSaviorUI": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-jzCKJatS7rpR9NecRn3Pu6n+5i2AZheRgC0QOk3fDpE=",
+      "url": "https://beatmods.com/cdn/mod/1566b5e1e50d4e8fd14b2defc864b660.zip",
+      "version": "1.0.3"
+    },
+    "BeatmapScanner": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil",
+        "SongCore",
+        "SongDetailsCache"
+      ],
+      "hash": "sha256-Yg3hBX/aaWDoCWV7QYlqimNFr3gUgPR8wDdnnHP0HQg=",
+      "url": "https://beatmods.com/cdn/mod/de83cfd17fef6580f2ef9a9bc7301000.zip",
+      "version": "1.5.19"
+    },
+    "BetterLegacyLights": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-7p9WXwd8DnO9YZ27qXinsQE7uvOOu9VSXTsflG1I8F4=",
+      "url": "https://beatmods.com/cdn/mod/522868101a78d04c9e8f3fb2aed0dda0.zip",
+      "version": "1.1.0"
+    },
+    "BetterSongList": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SongCore",
+        "SongDetailsCache"
+      ],
+      "hash": "sha256-1iFhgqAlq6wB0TMYDjHkQbtCPQxP36ZzvDmr2SUgGaU=",
+      "url": "https://beatmods.com/cdn/mod/90b4870cedbb41f3dee4f36fcc256639.zip",
+      "version": "0.4.3"
+    },
+    "BetterSongList PlayCount Sort": {
+      "depends": [
+        "BSIPA",
+        "BetterSongList"
+      ],
+      "hash": "sha256-nVBqbyMP0sSXRCnBAIO73ay1rVUiEBUaOqb5U19rZLI=",
+      "url": "https://beatmods.com/cdn/mod/8945e33f0e45929b904ddb2701137ade.zip",
+      "version": "1.0.0"
+    },
+    "BetterSongList_RandomSort": {
+      "depends": [
+        "BSIPA",
+        "BetterSongList"
+      ],
+      "hash": "sha256-RmpewNhLs2sRCcBrqsb+iEY6UzZbtXPnFLe9alufBls=",
+      "url": "https://beatmods.com/cdn/mod/f56e01d425c8b38f0591a4ebed1ebd5b.zip",
+      "version": "0.0.1+1.37.1"
+    },
+    "BetterSongSearch": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SongCore",
+        "SongDetailsCache"
+      ],
+      "hash": "sha256-rjftn9XH3gIM4+cESLlkfVwkm4u1HOofGtJZxLLQdMA=",
+      "url": "https://beatmods.com/cdn/mod/0526adae4b8b8d65d49f374add5cd8da.zip",
+      "version": "0.8.2"
+    },
+    "BetterSort.LastPlayed": {
+      "depends": [
+        "BS Utils",
+        "BSIPA",
+        "BetterSongList",
+        "SiraUtil"
+      ],
+      "hash": "sha256-1yQclyqlY0N29L5+14+wYsh5gDdsXb+JFddX3E9rLns=",
+      "url": "https://beatmods.com/cdn/mod/bff15554e0e9735cc8aaf7a67a6bbbc5.zip",
+      "version": "3.2.3"
+    },
+    "Camera2": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage"
+      ],
+      "hash": "sha256-wVeKwPwdOhH/M4PFCE2Ain17VC9Bft62JmDhNtwCkMk=",
+      "url": "https://beatmods.com/cdn/mod/4ea3e0cac97aa7ea387018a4ff5564f9.zip",
+      "version": "0.6.119"
+    },
+    "CameraUtils": {
+      "depends": [
+        "BSIPA"
+      ],
+      "hash": "sha256-cGbsMR3FmeHWVNcFV6vGwICbcrX01pXIz7hbsL8uI2Y=",
+      "url": "https://beatmods.com/cdn/mod/38507e3a9ff8486c75b002cc47226f43.zip",
+      "version": "1.0.8"
+    },
+    "CatCore": {
+      "depends": [],
+      "hash": "sha256-IaUzt8qrtLBdS3ysy9AJunTpyj+z2JBPGmoXiQVolxg=",
+      "url": "https://beatmods.com/cdn/mod/2f3ea27ba320ac57596ba7816b67861f.zip",
+      "version": "1.1.0"
+    },
+    "Claws": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-5EOGY0PQbP+QlpYTw+Y6ERIS73Y+R/SPtnISvBhKMkY=",
+      "url": "https://beatmods.com/cdn/mod/563dd7b8db29d749de40ebc95e8b2c66.zip",
+      "version": "1.12.1"
+    },
+    "ClearMind": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "CameraUtils",
+        "SongCore"
+      ],
+      "hash": "sha256-+1bFgJW7o8frwb9QfHaG8kV69h43tOISt/y/3a45SMY=",
+      "url": "https://beatmods.com/cdn/mod/db429972916ab9804656b6eb0b242328.zip",
+      "version": "0.0.4"
+    },
+    "ComboSplitter": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-U4LuZ7npYT9MqITOycrd/H4LuTZN01hoD4TM3agfmQk=",
+      "url": "https://beatmods.com/cdn/mod/1a1796bf15887344395d916bd24998fe.zip",
+      "version": "1.3.1"
+    },
+    "Counters+": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-rqOh/gs/PXusQkbe/jgFZeLq8HFqv1RedWvJwpCEAO0=",
+      "url": "https://beatmods.com/cdn/mod/50932de4eda356129a2c41179316da5b.zip",
+      "version": "2.3.12"
+    },
+    "Custom Backgrounds": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-gunMmQ2QH3ziBY7OhfZjKluU5m6cBrbG3epOcOhHnS0=",
+      "url": "https://beatmods.com/cdn/mod/8cc20d3186a6490c0f0707873130b15e.zip",
+      "version": "1.2.2"
+    },
+    "CustomBanners": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-dtJ5shTOmuTjlEggPXBUVP3AVNkPU32OCSII7CeqDZU=",
+      "url": "https://beatmods.com/cdn/mod/ec9dc04bd9a15e2b72b605ac07eaa200.zip",
+      "version": "0.2.0"
+    },
+    "CustomJSONData": {
+      "depends": [
+        "BSIPA"
+      ],
+      "hash": "sha256-MFVcd0hdKDe9KUYI/k4jw0QVuJQTmXvmemFQMYCQshY=",
+      "url": "https://beatmods.com/cdn/mod/fed31638bbb678580ef760ec83cfd486.zip",
+      "version": "2.6.8+1.40.0"
+    },
+    "CustomNotes": {
+      "depends": [
+        "AssetBundleLoadingTools",
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "CameraUtils",
+        "SiraUtil",
+        "SongCore"
+      ],
+      "hash": "sha256-u/OQ3y2N182nYnh/ypyTum2Kfny1UmEI23BJGt8hZlI=",
+      "url": "https://beatmods.com/cdn/mod/6be7e1a65a7bbee2effa79733f71eb6f.zip",
+      "version": "2.6.12"
+    },
+    "CustomPillows": {
+      "depends": [
+        "AssetBundleLoadingTools",
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-nFc3WbGNsElJWTuCojbv9ING0Q5jUXov2XN5FVFaIxA=",
+      "url": "https://beatmods.com/cdn/mod/f333355bbec54baa3267bded26e00333.zip",
+      "version": "0.0.10"
+    },
+    "CustomSaberColors": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-NAZq2yvP/hBXHmSia7G8TzhAOMzP2JiUw36X3HOhC/k=",
+      "url": "https://beatmods.com/cdn/mod/4c3cca815c0ce765a004d1e2f2584d36.zip",
+      "version": "0.2.6"
+    },
+    "CustomSabersLite": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SabersCore",
+        "SiraUtil"
+      ],
+      "hash": "sha256-X2KTXXt+10eocZwPWbTuAZriAlAJaAy9jBfupvDBLG4=",
+      "url": "https://beatmods.com/cdn/mod/7beba09b60793f89730c073843544375.zip",
+      "version": "1.0.4"
+    },
+    "CustomWalls": {
+      "depends": [
+        "AssetBundleLoadingTools",
+        "BS Utils",
+        "BSIPA",
+        "BeatSaberMarkupLanguage"
+      ],
+      "hash": "sha256-2+bquCS5fEr2Qr7LWzZvC4OZBUeADBMllHOEDijoBMk=",
+      "url": "https://beatmods.com/cdn/mod/c0f0bf532f50f0aee9991f23a8031db0.zip",
+      "version": "1.6.4"
+    },
+    "DataPuller": {
+      "depends": [
+        "BSIPA",
+        "BeatSaverSharp",
+        "SiraUtil",
+        "SongCore",
+        "SongDetailsCache",
+        "websocket-sharp"
+      ],
+      "hash": "sha256-QU8s/rkipzb8LJK9hY6LjxNJo3zfPzROqea3um9gNNs=",
+      "url": "https://beatmods.com/cdn/mod/b2d9fd3dab2de7b3de299a63a15c3d78.zip",
+      "version": "3.0.0"
+    },
+    "DiTails": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "BeatSaverSharp",
+        "SiraUtil",
+        "SongCore"
+      ],
+      "hash": "sha256-zy8t9w8tQhkcziM5hZ/C+RhYvq0pYzsmMla9xZ8QA7g=",
+      "url": "https://beatmods.com/cdn/mod/437904f6db78a2ee928738d7d254a93f.zip",
+      "version": "1.1.3"
+    },
+    "DiscordCore": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage"
+      ],
+      "hash": "sha256-n9lT3BxXjE6D7EB7S+NZyhqvoUBwC87luXZADRjVKMc=",
+      "url": "https://beatmods.com/cdn/mod/1dec6ade1b3e2fe08b8751c2682e19e8.zip",
+      "version": "3.0.6"
+    },
+    "Dynamic Bone": {
+      "depends": [],
+      "hash": "sha256-gVtKcEiEWsdgzLsL2mzDYx8LEu6kk3RZddrvnUHa/v4=",
+      "url": "https://beatmods.com/cdn/mod/4be47b089272a8008880ace535f92bec.zip",
+      "version": "1.2.0"
+    },
+    "EasyOffset": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-g+jmKjYiG5+kIj4giXPg+ysF/A899A2mjLEaCH+u0R4=",
+      "url": "https://beatmods.com/cdn/mod/e8ff556da15129134de459f2da72686f.zip",
+      "version": "2.1.16"
+    },
+    "Enhancements": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-XB/Al61nc+522HqxXoYdrHad6UiFfIGF9tNxbJ34ceI=",
+      "url": "https://beatmods.com/cdn/mod/638a847d32d8e510a12b929c578057fc.zip",
+      "version": "3.0.20"
+    },
+    "FCPercentage": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "Counters+",
+        "SiraUtil"
+      ],
+      "hash": "sha256-xMDLSLZHlK6kMhtP4JyDEhyqG3ms9k1JOCgoRhQr41g=",
+      "url": "https://beatmods.com/cdn/mod/0394e34f4c4e8071e8e9bb5dd90c6904.zip",
+      "version": "1.4.9"
+    },
+    "FFmpeg": {
+      "depends": [],
+      "hash": "sha256-wADiYo/g/1/DnNeQ477eLq8wXFnvJK9Rc+0uc73U6iE=",
+      "url": "https://beatmods.com/cdn/mod/65b5f23bce0e8e6ea1b7942a2f970edf.zip",
+      "version": "4.3.3"
+    },
+    "FPSCounter": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-6QFGWMfwZuP8SH7I2+b0RUMIuO9bnQRTBYJ9P8Sz2+s=",
+      "url": "https://beatmods.com/cdn/mod/a43d440b2134d4fee623a8fd4f584c38.zip",
+      "version": "3.1.3"
+    },
+    "FailButton": {
+      "depends": [
+        "BSIPA"
+      ],
+      "hash": "sha256-uxYxcPQAGRWSrxaJ57dVfsguReNt425uqq4WtCc+WVs=",
+      "url": "https://beatmods.com/cdn/mod/b641fadaa45fee9c41a362943b8beb00.zip",
+      "version": "0.0.4"
+    },
+    "Final IK": {
+      "depends": [],
+      "hash": "sha256-7BjFhKDdLAZXI6+6fBNFflR/dtfsdB/WCsoTtb7BKig=",
+      "url": "https://beatmods.com/cdn/mod/0dc804c710ba91da074c70fbe5785a84.zip",
+      "version": "1.9.0"
+    },
+    "GottaGoFast": {
+      "depends": [
+        "BSIPA"
+      ],
+      "hash": "sha256-7sIHQhbZPzMfq6MhU9mL1PPc+pcW5ucJHB6HTwuRw7o=",
+      "url": "https://beatmods.com/cdn/mod/05975004e449731788da1fd8206fb52e.zip",
+      "version": "0.2.5"
+    },
+    "HSVLayer": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "CameraUtils"
+      ],
+      "hash": "sha256-2xy67EUqbK2JvqdeLwRU2fjtNyfxKZFQPliSblrU3bc=",
+      "url": "https://beatmods.com/cdn/mod/37ca75bf96f872643042fff6493aaa28.zip",
+      "version": "1.0.2"
+    },
+    "HapticsTweaker": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-8tVvrNKNvPlpWlbthr8zHjG+/k7ygL6AMd0gWX//g9Y=",
+      "url": "https://beatmods.com/cdn/mod/66af9b85b64ce7862f985e080163c25d.zip",
+      "version": "1.1.0"
+    },
+    "Height": {
+      "depends": [
+        "BS Utils",
+        "BSIPA",
+        "BeatSaberMarkupLanguage"
+      ],
+      "hash": "sha256-g/R/7fFf/cFIrMn2mEHlI84dOFULm9MwmANwrds2OvQ=",
+      "url": "https://beatmods.com/cdn/mod/c2f7c22ca851b8888ecfca705a4d3014.zip",
+      "version": "0.0.5"
+    },
+    "HideTheLogo": {
+      "depends": [
+        "BSIPA",
+        "SiraUtil"
+      ],
+      "hash": "sha256-9xd88ordA93XP9vXIGKHVcd4f1FVI/K5LgBBxj6D1so=",
+      "url": "https://beatmods.com/cdn/mod/7dafbe9b66a7448ea2f969e934f58a89.zip",
+      "version": "1.0.3"
+    },
+    "HideThePanels": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-xIWCa1x9KOE55JhVZPJ3bBWJJhknMqMpjpyt4q88jT0=",
+      "url": "https://beatmods.com/cdn/mod/831dc26bcc4b3c8301d88d1c9a8f655d.zip",
+      "version": "0.0.2+1.40.3"
+    },
+    "HighlightBombs": {
+      "depends": [
+        "BSIPA",
+        "SiraUtil"
+      ],
+      "hash": "sha256-+6d1BjIHnbzoRrpXwuMoT8csuVZxv/CDlCRuZmT+gRM=",
+      "url": "https://beatmods.com/cdn/mod/4bedaa80ce5dda8414fea7d914fb94ad.zip",
+      "version": "1.0.3"
+    },
+    "HitScoreVisualizer": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-uIk1XNR8w7CaNS8IERC4EwrG4dKF+lh3ZGYRfVhYFNs=",
+      "url": "https://beatmods.com/cdn/mod/757ff70f0dc9ec64bcf0573fc2d42bf2.zip",
+      "version": "3.7.3"
+    },
+    "I Forgor": {
+      "depends": [
+        "BSIPA",
+        "SiraUtil"
+      ],
+      "hash": "sha256-ubE/kGLFU2pcGbeXRT/jKjQByO5u2tl3/Q0hEUfv7TI=",
+      "url": "https://beatmods.com/cdn/mod/3a6c131071f432a3ea58c12392c82349.zip",
+      "version": "1.4.1"
+    },
+    "ImageCoverExpander": {
+      "depends": [
+        "BSIPA",
+        "SiraUtil"
+      ],
+      "hash": "sha256-MLEoJfcYsnpuxMmqpHVQu6VLjterrEmSvdngh9adtCU=",
+      "url": "https://beatmods.com/cdn/mod/355e7e3cd9e1384189584df90238bb06.zip",
+      "version": "3.0.2"
+    },
+    "ImageFactory": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-JmX8um6nbfapeG5eoH3EXUzmL4S54jPQdYtbX5RnYtQ=",
+      "url": "https://beatmods.com/cdn/mod/07e2ef52334c37f82658db19498e8ac2.zip",
+      "version": "1.2.6"
+    },
+    "ImageSharp": {
+      "depends": [],
+      "hash": "sha256-sr9tGV8l4SmBmaOJ44GrQvFjsoQQWuYYElnXTyUoMBs=",
+      "url": "https://beatmods.com/cdn/mod/b642fec88b0f84a0643ebd401d08da35.zip",
+      "version": "2.0.0"
+    },
+    "Ini Parser": {
+      "depends": [],
+      "hash": "sha256-t2EpO+pz/zy5mY9ARZSq3mF2OKukMYIDMgGJuvNEn/E=",
+      "url": "https://beatmods.com/cdn/mod/5df74ad1c6b120fecdc615dd55f15b88.zip",
+      "version": "2.5.9"
+    },
+    "IntroSkip": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-MZvOOPaWYaOwmXBxuF1X5bQpW5aZrFQyh3sP7XKqSLk=",
+      "url": "https://beatmods.com/cdn/mod/7d98ae6049251eb4e3226a5c8ac675b3.zip",
+      "version": "4.0.8"
+    },
+    "KeepMyOverridesPls": {
+      "depends": [
+        "BSIPA",
+        "SiraUtil"
+      ],
+      "hash": "sha256-TC2nNJd466mOsCulGKGgVqeEtxm5dAVch3qmzj5zX7w=",
+      "url": "https://beatmods.com/cdn/mod/a8ff248df35de54765b4a0d6db036493.zip",
+      "version": "1.1.3"
+    },
+    "LeaderboardCore": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-A0t2/rpI1BMun4RgFRaJSsMt+flmZbSrriC4gK7fAV0=",
+      "url": "https://beatmods.com/cdn/mod/e9303bea2923995c94574c76901fd8b5.zip",
+      "version": "1.7.0"
+    },
+    "LookupID": {
+      "depends": [],
+      "hash": "sha256-X8g4yb82k6jjcoBW2VwHxbDhP5RMH59JYH9wG1jj0F0=",
+      "url": "https://beatmods.com/cdn/mod/5f5655b91193602c0311b8b6d1b4c71c.zip",
+      "version": "1.0.1"
+    },
+    "MenuCoverColors": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-wC6U/8Ep4Jinqe/tYoJTjudQONyKiR1JzefvpYLh0Lw=",
+      "url": "https://beatmods.com/cdn/mod/1aace9e096369f67c4a7c3300b1c2337.zip",
+      "version": "0.0.2+1.40.3"
+    },
+    "MenuFloaters": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-NuEM5MfSc+zQ9rxGQILuUlzbipStOIOquCHZsAA1oRE=",
+      "url": "https://beatmods.com/cdn/mod/515f69f3384cb1db837210905b6b0c1a.zip",
+      "version": "0.0.4+1.40.3"
+    },
+    "MenuSaberColors": {
+      "depends": [
+        "BSIPA",
+        "SiraUtil"
+      ],
+      "hash": "sha256-NsSZgQ59AxEQJSWNcGSqeiFFll0HK0+6smnG1ZnOOyU=",
+      "url": "https://beatmods.com/cdn/mod/950fcb380dd1eb20ce536c8aad0e19b5.zip",
+      "version": "1.0.13"
+    },
+    "MenuSelector": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-QdZvav6kcV9f149k31Aw3pqd6Z2XEguAYfOLICgPUqw=",
+      "url": "https://beatmods.com/cdn/mod/bf0d19076968f64be75a4e0d3280031f.zip",
+      "version": "1.0.0"
+    },
+    "MessagePack": {
+      "depends": [],
+      "hash": "sha256-gV6wXR/ialYb866ElEkD78C+InFxlQ+r79czubUFR2k=",
+      "url": "https://beatmods.com/cdn/mod/c872a5b8b16768d18387cc931407dd75.zip",
+      "version": "2.5.140"
+    },
+    "ModelMenu": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-3mlRhMpZaFqcv37ZuzIlgoqNapy4NEGH9AoTBJJ9jnU=",
+      "url": "https://beatmods.com/cdn/mod/54f5368c3b480e1d1248f7f1d66c3bbe.zip",
+      "version": "0.3.2"
+    },
+    "NoteCutGuide": {
+      "depends": [
+        "BS Utils",
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "CameraUtils"
+      ],
+      "hash": "sha256-VizQehINmAlSETikFxEjmBwTTtRp396FrAN0v0bUZBY=",
+      "url": "https://beatmods.com/cdn/mod/329a2d5ee996c726188f2c03228ec298.zip",
+      "version": "0.2.7"
+    },
+    "OpenVR API": {
+      "depends": [],
+      "hash": "sha256-PnjHFCvxMyuM5hMqubf+qCnf04zGdiAV/1m+0Tl7JGQ=",
+      "url": "https://beatmods.com/cdn/mod/eed7f56ce34df64da4cedafe674561b1.zip",
+      "version": "2.2.3"
+    },
+    "OpenXR Feature Manager": {
+      "depends": [
+        "BSIPA"
+      ],
+      "hash": "sha256-xwgNeEBDyFXtniSdyKjP8laP9i6EUtsP0zRURKZ2hgM=",
+      "url": "https://beatmods.com/cdn/mod/c9f128c949b4ac1e43f393e1f3ddd8fa.zip",
+      "version": "1.0.1"
+    },
+    "OpenXR Hands": {
+      "depends": [
+        "BSIPA",
+        "OpenXR Feature Manager",
+        "XR Hands"
+      ],
+      "hash": "sha256-76DgzH4Aywb6bmtCihZUOPs0EqsNowlK1Oe2UnFeEqU=",
+      "url": "https://beatmods.com/cdn/mod/aa65612c373b0e9ac39f574cf164877d.zip",
+      "version": "1.0.1"
+    },
+    "OpenXR Tracker Profiles": {
+      "depends": [
+        "BSIPA",
+        "OpenXR Feature Manager"
+      ],
+      "hash": "sha256-JZ6UCErTsnvUGiX0mpAB4gWivmJQP1LxOlVTct46o48=",
+      "url": "https://beatmods.com/cdn/mod/afba4707f4b2dbbbc8f5542ec6c6c8c8.zip",
+      "version": "1.0.0"
+    },
+    "PBOT": {
+      "depends": [
+        "BSIPA",
+        "SiraUtil",
+        "protobuf-net"
+      ],
+      "hash": "sha256-z/7fVbeXsl25WoM1G2ODAfJJqcxx13wDEj0XjENasfw=",
+      "url": "https://beatmods.com/cdn/mod/8509ab6b62a04fe957431e185d48060b.zip",
+      "version": "1.0.5"
+    },
+    "PPCounter": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "Counters+",
+        "SiraUtil",
+        "SongCore"
+      ],
+      "hash": "sha256-BjSOm70xJcGz/90p9L5F9MB8i4KHEF5MjqsHGiQx3GM=",
+      "url": "https://beatmods.com/cdn/mod/17ee05f2358b1dedd38e796bf662c57e.zip",
+      "version": "2.0.11"
+    },
+    "Particle Overdrive": {
+      "depends": [
+        "BS Utils",
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-JJkPtA/oCOOJfgwBJI5OvgKalfwGEBKUwpN+vo3GkIc=",
+      "url": "https://beatmods.com/cdn/mod/26249e52ef24805e6cbc61f0da3fd3e1.zip",
+      "version": "1.13.1"
+    },
+    "PentaSaber": {
+      "depends": [
+        "BS Utils",
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-KOevSg74PXTTrRIVh0XI0LLUwVHVBhopXyJSpklwL6E=",
+      "url": "https://beatmods.com/cdn/mod/6743961d2b3bec9e2b982418eb5e3f45.zip",
+      "version": "1.0.109"
+    },
+    "PitchBlack": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage"
+      ],
+      "hash": "sha256-rnJptPQP6ovuPSshOmfD53n/i/vLT03qvLnpwhv62vs=",
+      "url": "https://beatmods.com/cdn/mod/65656bf33b2a0b356c381132387ea7ea.zip",
+      "version": "0.0.3"
+    },
+    "RandomSongPlayer": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "BeatSaverSharp",
+        "SongCore",
+        "SongDetailsCache"
+      ],
+      "hash": "sha256-fQkk5wd+97ZetjWFJt0pyMZ0gBeb05RYTTBR9HHcPfM=",
+      "url": "https://beatmods.com/cdn/mod/b788ce8145e80d326039e909e52bf488.zip",
+      "version": "2.0.3"
+    },
+    "Reactive": {
+      "depends": [
+        "BSIPA",
+        "Yoga"
+      ],
+      "hash": "sha256-dyQdIz40EuRdAQnbraPSvqMCDvaF42C0e7m2mnqS9K0=",
+      "url": "https://beatmods.com/cdn/mod/eee5c298e219ba36024e6fc45d3ab3d8.zip",
+      "version": "1.0.0"
+    },
+    "SaberRandomizer": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SabersCore",
+        "SiraUtil"
+      ],
+      "hash": "sha256-iovinyF3MBzVXD/i51LpmcWoELUp+PjOIWVEIgJ7z9w=",
+      "url": "https://beatmods.com/cdn/mod/1484742923dd28aa09bccd01f204708f.zip",
+      "version": "1.0.2"
+    },
+    "SabersCore": {
+      "depends": [
+        "AssetBundleLoadingTools",
+        "BSIPA",
+        "SiraUtil"
+      ],
+      "hash": "sha256-EUwUpiJBsK15C4Qaaym44r8RZ4J6wBgel62fJAUgOZ4=",
+      "url": "https://beatmods.com/cdn/mod/91d8a6618ef24eda6a97f51ee429af99.zip",
+      "version": "1.0.1"
+    },
+    "ScoreSaberSharp": {
+      "depends": [],
+      "hash": "sha256-fzC+mW+PDpl/LYSONN4dA+9tx0T/wy0/5QWIHKIsbNM=",
+      "url": "https://beatmods.com/cdn/mod/8713168c598577ee7c73fa3cf0e26f5c.zip",
+      "version": "0.1.0"
+    },
+    "Scribble": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "Ini Parser",
+        "SiraUtil"
+      ],
+      "hash": "sha256-HJyKYwEfAojWx244YS3LDD5GRDALUeqXUdIIDun4IJI=",
+      "url": "https://beatmods.com/cdn/mod/f4a5dd433a7ae398fc7a7c791b358c81.zip",
+      "version": "0.2.6"
+    },
+    "SimpleClock": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-HcaRe0op4ANFJBIg2jFHE864dF26LU+gJgQ5eCSccDc=",
+      "url": "https://beatmods.com/cdn/mod/dc44870a017c387816cc306c89e0780a.zip",
+      "version": "1.0.1"
+    },
+    "SiraUtil": {
+      "depends": [
+        "BSIPA"
+      ],
+      "hash": "sha256-IlPlwxMk4eAbI0gKy6XO7mtn648WoHn1i8L2znsSBR8=",
+      "url": "https://beatmods.com/cdn/mod/ae14f7d3192a919d5d996c802fbde037.zip",
+      "version": "3.3.1"
+    },
+    "SliceDetails": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-BrjzBsXU1O484qZ53noKOKQxjfYwGyZwbv47mQteKK0=",
+      "url": "https://beatmods.com/cdn/mod/4122bed9882b4bd1ad3595e562cdf3b0.zip",
+      "version": "1.3.7"
+    },
+    "SliceVisualizer": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-wpj1f8Iv4LankEUl+7j9QtYcHyqf+XAev1x5Q1DxuTI=",
+      "url": "https://beatmods.com/cdn/mod/706452797ee6b8b91fa789eb68cd0bb7.zip",
+      "version": "0.1.6"
+    },
+    "Small Menu": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-0QXzCjJBvf4p2LflzdRDC3svw47/V2T2rPV+w0wqShw=",
+      "url": "https://beatmods.com/cdn/mod/472deb922a426ddbc55084d8bce0a2d3.zip",
+      "version": "1.2.1"
+    },
+    "SongChartVisualizer": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-KQpV/4fYdp8658XQtEpn6ebono74OisbuYjr6ij4naQ=",
+      "url": "https://beatmods.com/cdn/mod/5d3fc025fe098277667fc0846e1b8fe3.zip",
+      "version": "1.1.11"
+    },
+    "SongCore": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-+b5dZkJteVxsivKk2gFQopjS1qZfuryrMW03kIikABk=",
+      "url": "https://beatmods.com/cdn/mod/0af9c0a03074c17ca15c1b667a0e30c8.zip",
+      "version": "3.16.0"
+    },
+    "SongDetailsCache": {
+      "depends": [
+        "protobuf-net"
+      ],
+      "hash": "sha256-bMyBbdQHUrRtXn4c+0Hlr52RXRoDK+Uc4eUvsVTaoow=",
+      "url": "https://beatmods.com/cdn/mod/e1167b64cd3eff7e3651ec2dbbe50d81.zip",
+      "version": "1.4.0"
+    },
+    "SongRankedBadge": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SongCore",
+        "SongDetailsCache"
+      ],
+      "hash": "sha256-YCjyOS3V4ij0d4N6fjLZXwyor08baXsXyELqYsBQ7f8=",
+      "url": "https://beatmods.com/cdn/mod/c6944b8a4b00b0c0bb1d44f273b3bb18.zip",
+      "version": "1.0.6"
+    },
+    "SoundReplacer": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-wUzJnLC9TqTDq0c0VpJInL3+2LK1d5JSALGo9vT5NRI=",
+      "url": "https://beatmods.com/cdn/mod/7d7a869996e10249d1f85f95e060319b.zip",
+      "version": "2.0.1"
+    },
+    "StepBackWall": {
+      "depends": [
+        "BS Utils",
+        "BSIPA",
+        "BeatSaberMarkupLanguage"
+      ],
+      "hash": "sha256-TQeqt3ixUlGhM2pgkDkZKUwFXb0ZFHRsDwsn9Kx6DE8=",
+      "url": "https://beatmods.com/cdn/mod/5c3cd783e1235a6c0720f7ece060bb9c.zip",
+      "version": "1.3.4"
+    },
+    "System.IO.Compression": {
+      "depends": [],
+      "hash": "sha256-kGfdr1LAd/OKJ6zmGAqBNM6q8ey6dS0I3oG0zAwTqkM=",
+      "url": "https://beatmods.com/cdn/mod/a4e9e26f61967e56168e08eecb01ab88.zip",
+      "version": "4.6.57"
+    },
+    "System.IO.Compression.FileSystem": {
+      "depends": [
+        "System.IO.Compression"
+      ],
+      "hash": "sha256-G296M6aZgDRHF6NyQO2AsCKQOlKWjUlo8wfPdU46A/c=",
+      "url": "https://beatmods.com/cdn/mod/e19f6fd395d54de7bfcbbbe3084dea28.zip",
+      "version": "4.7.3056"
+    },
+    "TimeSyncStutterFix": {
+      "depends": [
+        "BSIPA"
+      ],
+      "hash": "sha256-CsIk5ETpHyp1DRd/1nor4tTW0PLkdYGC+ffxHnKmIOU=",
+      "url": "https://beatmods.com/cdn/mod/a01b033e9bdba9a3ee851b3565eddf01.zip",
+      "version": "1.0.0"
+    },
+    "Tweaks55": {
+      "depends": [
+        "BSIPA"
+      ],
+      "hash": "sha256-qszn/x98aPjbFtiqo2Wxg+pfLvzNCNvx05AdkumPY90=",
+      "url": "https://beatmods.com/cdn/mod/978c787eccb83a663c481a6a65929989.zip",
+      "version": "0.3.18"
+    },
+    "WaitHoldUp": {
+      "depends": [
+        "BSIPA",
+        "SiraUtil"
+      ],
+      "hash": "sha256-aa15MjZAxXYRXjNqMeNWUpI9vgZYsaECK4tZKH6TEzk=",
+      "url": "https://beatmods.com/cdn/mod/eb50077a27e3de7a4341233b3cbdebd1.zip",
+      "version": "0.0.1+1.29.1"
+    },
+    "WhyIsThereNoLeaderboard": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "SiraUtil"
+      ],
+      "hash": "sha256-RdojcdstWMz90rlBDzpwVGcz+hxnaDAtTW/4gS2QoLY=",
+      "url": "https://beatmods.com/cdn/mod/9447ccfdf0badb1c06bbed1e8911e19d.zip",
+      "version": "1.0.3"
+    },
+    "XR Hands": {
+      "depends": [],
+      "hash": "sha256-fwwC7OxUYj1ADvy8as3B9ovGBGOTGZdAfUSOec39Mb0=",
+      "url": "https://beatmods.com/cdn/mod/44e5a446ba77ef7ce9271a720415bb42.zip",
+      "version": "1.1.0"
+    },
+    "Yoga": {
+      "depends": [],
+      "hash": "sha256-PPrcggrugPA0dVoFCrOVoS6eBo8zgy6IVrNVs1Uh1Vo=",
+      "url": "https://beatmods.com/cdn/mod/265813eefc05400dabadfe80f6779de2.zip",
+      "version": "3.2.1"
+    },
+    "bHaptics": {
+      "depends": [],
+      "hash": "sha256-JIGbFDOmGaXgqFHRVeqY1TVbz5Zeqt7hftcGVU0UjMk=",
+      "url": "https://beatmods.com/cdn/mod/9f7016cde276d3fec2e872a811d47721.zip",
+      "version": "1.4.18"
+    },
+    "bHapticsFunctional": {
+      "depends": [
+        "BSIPA",
+        "bHaptics"
+      ],
+      "hash": "sha256-b63wjLVP+zzbY9tBWrWEajYQSDl+GeKnAd6HvKmEuVo=",
+      "url": "https://beatmods.com/cdn/mod/de7dcf589413e445faf97eae235b2c42.zip",
+      "version": "1.1.6"
+    },
+    "bHapticsMusical": {
+      "depends": [
+        "BSIPA",
+        "bHaptics"
+      ],
+      "hash": "sha256-6iwGRVXiwNOQTjTo//78SrXrS8MS9sRnj8nA3I/DEhA=",
+      "url": "https://beatmods.com/cdn/mod/d19ba40660bde4572ee11be7b97c9d16.zip",
+      "version": "1.1.4"
+    },
+    "bsrpc": {
+      "depends": [
+        "BSIPA",
+        "BeatSaberMarkupLanguage",
+        "DataPuller",
+        "DiscordCore"
+      ],
+      "hash": "sha256-cOzl4KyONhvGIAKZ4LG982qEWb9uUs1WtnnqWHLipKc=",
+      "url": "https://beatmods.com/cdn/mod/520cc1de0186c00b16a6fc7520ae9bce.zip",
+      "version": "1.6.0"
+    },
+    "protobuf-net": {
+      "depends": [],
+      "hash": "sha256-i/SjYQOBcuqywMLmc3dz1smkf8ZQSpcwSjX2l9UWZBQ=",
+      "url": "https://beatmods.com/cdn/mod/1f55ae4b80b747b5f03fa18337ead864.zip",
+      "version": "3.0.102"
+    },
+    "websocket-sharp": {
+      "depends": [],
+      "hash": "sha256-y6E8DsSRI8KgBUaZyeGNuroRTNIpemyaC38tZVbrPxg=",
+      "url": "https://beatmods.com/cdn/mod/18968f984afdbc619727793739ef9caa.zip",
+      "version": "1.0.4"
+    },
+    "yt-dlp": {
+      "depends": [],
+      "hash": "sha256-c+2kgbJbYbru92MOGNfXUulFTPtDV7xLTxxB22Wtk6A=",
+      "url": "https://beatmods.com/cdn/mod/1af2114d5d966bbad8de89db8abe9a7a.zip",
+      "version": "2024.10.7"
+    }
+  }
+}

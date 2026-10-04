@@ -99,6 +99,19 @@ To boot NixOS, hold Power until the LED goes off, then power on while holding AU
 - **Verified:** on the Frame on 2026-10-03. The tab registers with SteamVR, and `framecorder --duration 6` read the panels through `framecorder-grab@.service` and saved 1920x1080 HEVC at 72 fps with no dropped frames, 1.26 ms of GPU per frame, and a game-audio track. A second recording, with the headset in use, shows the passthrough view. `framecorder-sync` listens on 38619.
 - **Not verified:** the tab's controls in the headset, the mic and pairing a sync device.
 
+## Beat Saber mods
+
+`beat-saber.nix` installs [BeatMods](https://beatmods.com) mods into Beat Saber by name. `frame.beatSaber.mods` in `flake.nix` lists them; BSIPA, the mod loader, and each mod's dependencies come along. `beat-saber/beatmods.json` pins every verified mod for one game version, with hashes, and `tools/beatmods-lock.sh <game version>` regenerates it. A name that isn't in it fails the build.
+
+- BeatMods has mods for 1.44.1 and none for 1.45, so Beat Saber needs Steam's `1.44.1_legacy` branch (Properties, Game Versions & Betas).
+- Beat Saber's launch options must be `/run/current-system/sw/bin/beat-saber-mods %command%`. At each launch it copies the declared set into the game folder, deletes files of the previous set that are no longer declared, and starts the game with `WINEDLLOVERRIDES=winhttp=n,b`, so that Proton loads BSIPA's `winhttp.dll`, and with `--no-yeet`, so that BSIPA doesn't move the mods aside after a version change. The set includes `IPA.exe`: BSIPA skips every mod when a file its manifest lists is missing, and it only runs `IPA.exe` when that is newer than itself.
+- BSIPA patches `Beat Saber_Data/Managed/UnityEngine.CoreModule.dll` at its first start. `.nix-mods/` in the game folder holds an unpatched copy and the list of installed files. With an empty list, or a game version the mods aren't for, the next launch removes the mods, restores that file and starts the game without them. It also removes empty folders that weren't there before the first install. `UserData`, `Logs` and files you added yourself stay.
+- To remove the module, empty the list and launch once, then clear the launch options.
+- The wrapper logs problems to Steam's journal: `journalctl --user -u steam | grep beat-saber-mods`.
+- **Verified:** on the Frame on 2026-10-03, Beat Saber 1.44.1 under Proton 11.0 (ARM64) loads BSIPA 4.3.7, SongCore, BeatSaverDownloader and their dependencies, 11 plugins in all, and BeatSaverDownloader downloads songs from the menu. Removing the mods restored the unpatched file and left `UserData`, `Logs` and the downloaded songs.
+- **Broken:** with those mods, starting any song fails under Proton 11.0 (ARM64). An InvalidCastException in Zenject injection and in MonoMod's struct-return glue (`AbiFixup` for `ColorManager.ColorForSaberType`) leaves the level frozen with NullReferenceExceptions every frame. `flake.nix` lists no mods until that's fixed.
+- **Not verified:** whether the game without mods plays the downloaded songs in `CustomLevels`.
+
 ## License
 
 [LICENSE](LICENSE) lets anyone use, copy, modify and distribute this with credit, except in or for one named project. It is not an open-source license. [NOTICE](NOTICE) lists the third-party parts it does not cover.

@@ -19,12 +19,17 @@
           ./stremio.nix
           ./omarchy.nix
           ./framecorder.nix
+          ./beat-saber.nix
         ];
       };
       frame = slotA.extendModules {
         modules = [
           {
             frame.storage.poolUuid = "4bac5c02-4a89-4377-8388-ce55ef171552";
+            frame.beatSaber.mods = [
+              "SongCore"
+              "BeatSaverDownloader"
+            ];
           }
         ];
       };
