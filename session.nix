@@ -452,6 +452,7 @@ in
     requires = [ "sys-subsystem-net-devices-wlan0.device" ];
     before = [ "NetworkManager.service" ];
     wantedBy = [ "multi-user.target" ];
+    restartIfChanged = false;
     path = [ pkgs.iproute2 ];
     serviceConfig = {
       Type = "oneshot";
@@ -465,6 +466,7 @@ in
     description = "FPGA configuration service";
     after = [ "local-fs.target" ];
     wantedBy = [ "multi-user.target" ];
+    restartIfChanged = false;
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
@@ -476,6 +478,7 @@ in
   systemd.services.dsp_service = {
     description = "SteamVR tracking DSP service";
     wantedBy = [ "multi-user.target" ];
+    restartIfChanged = false;
     serviceConfig = {
       Type = "exec";
       ExecStart = inFhs "/usr/share/deckard/select_steamvr.sh drivers/cv/bin/linuxarm64/dsp_service";
@@ -511,6 +514,7 @@ in
     ];
     wants = [ "graphical-session-pre.target" ];
     after = [ "graphical-session-pre.target" ];
+    restartIfChanged = false;
     unitConfig = {
       RefuseManualStart = true;
       StartLimitIntervalSec = 0;
@@ -535,6 +539,7 @@ in
     partOf = [ "graphical-session.target" ];
     after = [ "gamescope-session.service" ];
     requires = [ "gamescope-session.service" ];
+    restartIfChanged = false;
     unitConfig.StartLimitIntervalSec = 0;
     environment = valveMesaEnv;
     serviceConfig = {
@@ -567,6 +572,7 @@ in
     partOf = [ "graphical-session.target" ];
     wants = [ "steamvr.service" ];
     after = [ "steamvr.service" ];
+    restartIfChanged = false;
     environment = valveMesaEnv // {
       STEAM_LAUNCH_WRAPPER_AFFINITY_LIST = "0xf8";
       STEAM_DESKTOP_APP_AFFINITY_LIST = "0xf8";

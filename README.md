@@ -54,7 +54,7 @@ Stock SteamOS on slot B still specifies an ext4 home filesystem in its fstab. Th
 
 Building aarch64 on x86_64 needs qemu binfmt: `sudo tools/binfmt.sh`.
 
-- `tools/deploy.sh` builds `frame`, copies and switches a running shared-pool Frame at `FRAME_HOST`, then prints the system path. Initial migration must register the pool's system profile separately from the slot-A recovery profile.
+- `tools/deploy.sh` builds `frame`, copies and switches a running shared-pool Frame at `FRAME_HOST`, then prints the system path. The switch doesn't restart Steam, SteamVR, gamescope or the FPGA, DSP and Wi-Fi MAC units, so it doesn't interrupt a game; they pick up changes at the next session start or boot. Initial migration must register the pool's system profile separately from the slot-A recovery profile.
 - To update the recovery system, build `nixosConfigurations.frame-recovery`, copy it into slot A's store with `nix copy --to "ssh-ng://root@$FRAME_HOST?remote-store=local%3Froot%3D%2Fmnt%2Fframe-boot"`, then run `nix-env --store /mnt/frame-boot -p /mnt/frame-boot/nix/var/nix/profiles/<profile> --set <path>` on the Frame for `frame-recovery` and `system`. `/boot/recovery` needs new files only if the recovery kernel or initrd changed.
 - `tools/stage-slotA.sh <nm-connection>` builds the image and injects Wi-Fi.
 - `tools/write-slotA.sh` then writes slot A over SSH from SteamOS. It refuses unless SteamOS booted from slot B, and it needs passwordless sudo for `steamos` there.
