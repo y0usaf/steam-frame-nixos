@@ -3,6 +3,9 @@ steam-frame-nixos
 The license is in LICENSE.
 
 Not covered by it: Valve's software and files (including the gitignored
-valve/), Omarchy and Nixpkgs. They are not part of this work and keep their own
-licenses. omarchy/aquamarine-gamescope.patch modifies Aquamarine
+valve/), Omarchy, framecorder, BSIPA and the Beat Saber mods that
+beat-saber/beatmods.json lists, and Nixpkgs. They are not part of this work and
+keep their own licenses. omarchy/aquamarine-gamescope.patch modifies Aquamarine
 (BSD-3-Clause); the Aquamarine code it quotes keeps that license.
+framecorder/grab-socket.patch modifies framecorder (MIT); the framecorder code
+it quotes keeps that license.
