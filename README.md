@@ -88,6 +88,17 @@ To boot NixOS, hold Power until the LED goes off, then power on while holding AU
 - **Verified:** on the Frame, Steam's FHS has the WiVRn entry and the 26.9 client with no missing libraries, and the PC's port 9757 is reachable from the Frame.
 - **Not verified:** pairing, a connection and streaming.
 
+## framecorder
+
+`framecorder.nix` builds [framecorder](https://github.com/coah80/framecorder) 0.1.1 from its release tag. It records what the panels show, with a tab in the SteamVR dashboard and Wi-Fi sync to framecorder's apps. Nix replaces framecorder's installer and updater, so `framecorder-setup` is not installed.
+
+- `framecorder-ui`, the tab, starts and stops with SteamVR. It runs in the FHS environment, where `/opt/steamvr` and Valve's Mesa are, and starts the recorder. Steam's + menu lists it as framecorder.
+- Reading the panels needs `CAP_SYS_ADMIN`. Bubblewrap sets no_new_privs, so a helper with a file capability gets nothing inside the FHS environment. Instead, `framecorder-grab.socket` listens on `/run/framecorder-grab.sock`, and each connection starts `framecorder-grab@.service` outside the FHS environment, as `steamos`, with only that capability and only `/dev/dri/card0`. `framecorder/grab-socket.patch` makes the recorder connect there when the socket exists, instead of starting the helper itself.
+- `framecorder-sync` runs as a user service of `steamos` and listens on TCP 38619, which the firewall opens.
+- The update check in framecorder's apps fails, since `framecorder-setup` is not installed.
+- **Verified:** on the Frame on 2026-10-03. The tab registers with SteamVR, and `framecorder --duration 6` read the panels through `framecorder-grab@.service` and saved 1920x1080 HEVC at 72 fps with no dropped frames, 1.26 ms of GPU per frame, and a game-audio track. A second recording, with the headset in use, shows the passthrough view. `framecorder-sync` listens on 38619.
+- **Not verified:** the tab's controls in the headset, the mic and pairing a sync device.
+
 ## License
 
 [LICENSE](LICENSE) lets anyone use, copy, modify and distribute this with credit, except in or for one named project. It is not an open-source license. [NOTICE](NOTICE) lists the third-party parts it does not cover.

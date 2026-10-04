@@ -18,6 +18,7 @@
           ./wivrn.nix
           ./stremio.nix
           ./omarchy.nix
+          ./framecorder.nix
         ];
       };
       frame = slotA.extendModules {

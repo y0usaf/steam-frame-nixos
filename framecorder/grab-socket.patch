@@ -1,0 +1,78 @@
+diff --git a/src/grab.rs b/src/grab.rs
+index 35abcfc..717a015 100644
+--- a/src/grab.rs
++++ b/src/grab.rs
+@@ -26,9 +26,21 @@ pub fn helper_path() -> Option<PathBuf> {
+     std::env::var_os("HOME").map(|h| PathBuf::from(h).join(".local/lib/framecorder/framecorder-grab"))
+ }
+ 
++const HELPER_SOCKET: &str = "/run/framecorder-grab.sock";
++
++fn helper_socket() -> Option<&'static Path> {
++    use std::os::unix::fs::FileTypeExt;
++    let path = Path::new(HELPER_SOCKET);
++    std::fs::metadata(path).is_ok_and(|m| m.file_type().is_socket()).then_some(path)
++}
++
++pub fn helper_ready() -> bool {
++    helper_socket().is_some() || helper_installed()
++}
++
+ /// Whether the helper's in place: owned by root (so nothing but root could
+ /// have put it there) and holding its permission.
+-pub fn helper_ready() -> bool {
++fn helper_installed() -> bool {
+     use std::os::unix::fs::MetadataExt;
+     let Some(path) = helper_path() else { return false };
+     let Ok(meta) = std::fs::metadata(&path) else { return false };
+@@ -130,20 +142,29 @@ fn reply(status: u32, b: &Exported) -> [u8; REPLY_LEN] {
+ /// The recorder's side: the helper, started and asked per frame.
+ pub struct Grabber {
+     sock: UnixStream,
+-    child: Child,
++    child: Option<Child>,
+ }
+ 
+ impl Grabber {
+     pub fn start(card_path: &Path) -> Result<Self> {
+-        let path = helper_path().context("HOME isn't set")?;
+-        let (ours, theirs) = UnixStream::pair()?;
+-        let child = Command::new(&path)
+-            .arg(card_path)
+-            .stdin(Stdio::from(OwnedFd::from(theirs)))
+-            .stdout(Stdio::null())
+-            .spawn()
+-            .with_context(|| format!("starting {}", path.display()))?;
+-        let mut grabber = Self { sock: ours, child };
++        let (sock, child) = match helper_socket() {
++            Some(path) => {
++                let sock = UnixStream::connect(path).with_context(|| format!("connecting to {}", path.display()))?;
++                (sock, None)
++            }
++            None => {
++                let path = helper_path().context("HOME isn't set")?;
++                let (ours, theirs) = UnixStream::pair()?;
++                let child = Command::new(&path)
++                    .arg(card_path)
++                    .stdin(Stdio::from(OwnedFd::from(theirs)))
++                    .stdout(Stdio::null())
++                    .spawn()
++                    .with_context(|| format!("starting {}", path.display()))?;
++                (ours, Some(child))
++            }
++        };
++        let mut grabber = Self { sock, child };
+         let mut version = [0u8; 4];
+         grabber.sock.read_exact(&mut version).context("the panel helper didn't answer")?;
+         let version = u32::from_le_bytes(version);
+@@ -174,7 +195,9 @@ impl Drop for Grabber {
+     fn drop(&mut self) {
+         // Hanging up ends it.
+         let _ = self.sock.shutdown(std::net::Shutdown::Both);
+-        let _ = self.child.wait();
++        if let Some(child) = &mut self.child {
++            let _ = child.wait();
++        }
+     }
+ }
+ 
