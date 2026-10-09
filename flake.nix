@@ -20,6 +20,8 @@
           ./omarchy.nix
           ./framecorder.nix
           ./beat-saber.nix
+          ./steamos-manager.nix
+          ./powerbuttond.nix
         ];
       };
       frame = slotA.extendModules {

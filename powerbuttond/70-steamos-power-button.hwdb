@@ -1,0 +1,2 @@
+evdev:name:pmic_pwrkey:*
+ STEAMOS_POWER_BUTTON=1
