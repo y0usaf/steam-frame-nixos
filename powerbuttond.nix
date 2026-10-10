@@ -15,8 +15,7 @@ let
 
     postPatch = ''
       substituteInPlace powerbuttond.c \
-        --replace-fail /.steam/root/ubuntu12_32/steam /.steam/steam/steamrtarm64/steam \
-        --replace-fail '"shortpowerpress"' '"longpowerpress"'
+        --replace-fail /.steam/root/ubuntu12_32/steam /.steam/steam/steamrtarm64/steam
     '';
 
     nativeBuildInputs = [ pkgs.pkg-config ];
