@@ -37,10 +37,12 @@ in
 {
   services.udev.packages = [ powerbuttond ];
 
+  services.logind.settings.Login.HandlePowerKey = "ignore";
+
   systemd.user.services.steamos-powerbuttond = {
     description = "Power Button daemon for SteamOS";
-    wantedBy = [ "steamvr.service" ];
-    requisite = [ "steamvr.service" ];
+    wantedBy = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
     serviceConfig = {
       ExecStart = "${powerbuttond}/libexec/steamos-powerbuttond";
       Restart = "on-failure";
