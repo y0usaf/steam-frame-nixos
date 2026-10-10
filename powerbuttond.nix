@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, frameSession, ... }:
 let
   version = "4.2";
 
@@ -44,7 +44,7 @@ in
     wantedBy = [ "graphical-session.target" ];
     partOf = [ "graphical-session.target" ];
     serviceConfig = {
-      ExecStart = "${powerbuttond}/libexec/steamos-powerbuttond";
+      ExecStart = frameSession.inFhs "${powerbuttond}/libexec/steamos-powerbuttond";
       Restart = "on-failure";
       Slice = "session.slice";
     };
