@@ -13,6 +13,7 @@ let
     name = "deckard-linux-${builtins.substring 0 12 commit}";
     url = "https://codeload.github.com/evlaV/deckard-linux/tar.gz/${commit}";
     hash = "sha256-evSMHO+lGmz7auKJvpp8t1stZJdxF5Omhx4ne8q9sTw=";
+    extension = "tar.gz";
   };
 
   kernel =
