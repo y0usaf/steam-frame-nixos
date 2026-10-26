@@ -28,6 +28,12 @@ in
     description = "UUID of the shared Btrfs storage pool, or null to keep root on slot A.";
   };
 
+  options.frame.buildSystem = lib.mkOption {
+    type = lib.types.str;
+    default = "x86_64-linux";
+    description = "System that cross-compiles the kernel.";
+  };
+
   config = {
     assertions = [
       {
@@ -40,7 +46,9 @@ in
     system.stateVersion = "26.05";
 
     boot.loader.grub.enable = false;
-    boot.kernelPackages = pkgs.linuxPackagesFor valve.kernel;
+    boot.kernelPackages = import ./kernel.nix {
+      pkgs = import pkgs.path { system = config.frame.buildSystem; };
+    };
     hardware.deviceTree.enable = false;
     hardware.firmware = [ valve.firmware ];
     hardware.firmwareCompression = "none";

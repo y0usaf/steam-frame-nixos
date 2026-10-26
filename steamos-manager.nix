@@ -1,18 +1,15 @@
 { pkgs, ... }:
 let
-  rev = "fd665daed3b2212cd3213d51d700b526e8fa57d2";
-  src = pkgs.fetchFromGitLab {
-    domain = "gitlab.steamos.cloud";
-    owner = "holo";
-    repo = "steamos-manager";
-    inherit rev;
-    hash = "sha256-HzNfduyOqnUU8A95ClldlO3TMYHbrJVA0fdE+QLYHTc=";
-  };
+  version = "26.4.1";
+  src =
+    (pkgs.callPackage ./valve.nix { }).bundleSource "steamos-manager-${version}-5.src.tar.gz"
+      "sha256-BT9icR1kfmsmnYHdopWHbkx1i27bOBOAJpU+SDpHu0A="
+      "steamos-manager-${version}"
+      "304a0816d6f6373d0c83fc5636f29b6df5e2838a";
 
   steamosManager = pkgs.rustPlatform.buildRustPackage {
     pname = "steamos-manager";
-    version = "26.4.1-unstable-2026-09-15";
-    inherit src;
+    inherit version src;
     cargoLock.lockFile = "${src}/Cargo.lock";
     doCheck = false;
 
@@ -84,20 +81,6 @@ in
     unitConfig = rateLimit;
     serviceConfig = restart // {
       ExecStart = "${steamosManager}/lib/steamos-manager";
-    };
-  };
-
-  systemd.user.services.steamos-manager-session-cleanup = {
-    description = "SteamOS Manager temporary session cleanup";
-    wantedBy = [ "graphical-session-pre.target" ];
-    requires = [ "steamos-manager.service" ];
-    after = [
-      "default.target"
-      "steamos-manager.service"
-    ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${steamosManager}/bin/steamosctl clean-temporary-sessions";
     };
   };
 }

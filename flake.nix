@@ -61,9 +61,10 @@
           nixos = recovery;
         };
         wivrn-server = nixpkgs.legacyPackages.x86_64-linux.wivrn;
-        deckard-kernel = import ./kernel.nix {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        };
+        deckard-kernel =
+          (import ./kernel.nix {
+            pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          }).kernel;
       };
     };
 }

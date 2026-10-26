@@ -15,42 +15,20 @@ let
     GBM_BACKENDS_PATH = "/usr/lib/gbm";
   };
 
-  vulkanHeaders = pkgs.vulkan-headers.overrideAttrs {
-    version = "1.4.309.0";
-    src = pkgs.fetchFromGitHub {
-      owner = "KhronosGroup";
-      repo = "Vulkan-Headers";
-      rev = "vulkan-sdk-1.4.309.0";
-      hash = "sha256-LfJ7um+rzc4HdkJerHWkuPWeEc7ZFSBafbP+svAjklk=";
-    };
-  };
-  vulkanLoader = (pkgs.vulkan-loader.override { vulkan-headers = vulkanHeaders; }).overrideAttrs (o: {
-    version = "1.4.309.0";
-    src = pkgs.fetchFromGitHub {
-      owner = "KhronosGroup";
-      repo = "Vulkan-Loader";
-      rev = "vulkan-sdk-1.4.309.0";
-      hash = "sha256-LZRACulOrnlL9do216zTeCTXGfy2pLxqs+f9phDD3Pg=";
-    };
-    cmakeFlags = map (
-      f: if lib.hasPrefix "-DSYSCONFDIR=" f then "-DSYSCONFDIR=/etc" else f
-    ) o.cmakeFlags;
-  });
-
   fhs = pkgs.buildFHSEnv {
     name = "frame-fhs";
     targetPkgs =
       p:
       [
-        vulkanLoader
+        valve.vulkanLoader
         valve.mesa
-        valve.spirvTools
         valve.vulkanLayers
         valve.steamvr
         valve.steamClient
         valve.steamvrSession
         valve.gamescope
         valve.steamBootstrap
+        valve.holoCursors
         valve.hwSupportTree
         valve.eeprom
         valve.fpga
@@ -435,7 +413,7 @@ in
   ]
   ++ lib.optional (config.frame.storage.poolUuid != null) "d /games 0755 steamos users -";
 
-  boot.extraModulePackages = [ valve.v4l2loopback ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
   boot.kernelModules = [ "v4l2loopback" ];
   boot.extraModprobeConfig = ''
     options v4l2loopback video_nr=99 card_label="SteamVR" exclusive_caps=1

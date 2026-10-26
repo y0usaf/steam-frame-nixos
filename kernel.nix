@@ -2,28 +2,36 @@
   pkgs,
 }:
 let
-  inherit (pkgs) lib;
-
-  commit = "fbdbca41fd45111219b6a188d5d7fe5c9e7872b7";
+  rev = "733a4be78129d1a9481d22c0a6ace630adacc1da";
+  short = builtins.substring 0 12 rev;
   version = "6.18.0";
-  localVersion = "-gfbdbca41fd45";
-  modDirVersion = version + localVersion;
+  localVersion = "-g" + short;
+  cross = pkgs.pkgsCross.aarch64-multiplatform;
 
-  src = pkgs.fetchzip {
-    name = "deckard-linux-${builtins.substring 0 12 commit}";
-    url = "https://codeload.github.com/evlaV/deckard-linux/tar.gz/${commit}";
-    hash = "sha256-evSMHO+lGmz7auKJvpp8t1stZJdxF5Omhx4ne8q9sTw=";
-    extension = "tar.gz";
+  kernel = cross.linuxKernel.manualConfig {
+    pname = "linux-deckard";
+    inherit version;
+    modDirVersion = version + localVersion;
+    src = cross.fetchzip {
+      name = "deckard-linux-" + short;
+      url = "https://codeload.github.com/evlaV/deckard-linux/tar.gz/" + rev;
+      hash = "sha256-KmqUYdPVMPxVQdvAUhCQ/WebSFZAcIUrVbbMsxVTYQk=";
+      extension = "tar.gz";
+    };
+    configfile = ./gabe_defconfig;
+    extraMakeFlags = [ ("LOCALVERSION=" + localVersion) ];
   };
-
-  kernel =
-    (pkgs.pkgsCross.aarch64-multiplatform.linuxKernel.manualConfig {
-      pname = "linux-deckard";
-      inherit src version modDirVersion;
-      configfile = ./deckard-gabe_defconfig;
-    }).overrideAttrs
-      (old: {
-        makeFlags = old.makeFlags ++ [ "LOCALVERSION=${localVersion}" ];
-      });
 in
-kernel // { inherit src; }
+(cross.linuxPackagesFor kernel).extend (
+  _: super: {
+    v4l2loopback = super.v4l2loopback.overrideAttrs {
+      version = "20251112.1";
+      src = cross.fetchFromGitHub {
+        owner = "evlaV";
+        repo = "deckard-v4l2loopback";
+        tag = "20251112.1";
+        hash = "sha256-Ycx9GZM21aY/QwqYpvK1iInhVs0L/va4GTXnNwnggf4=";
+      };
+    };
+  }
+)
