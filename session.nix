@@ -291,7 +291,7 @@ in
   fileSystems."/mnt/steamos-data" =
     if config.frame.storage.poolUuid == null then
       {
-        device = "/dev/disk/by-uuid/4bac5c02-4a89-4377-8388-ce55ef171552";
+        device = "/dev/disk/by-partlabel/home";
         fsType = "ext4";
         neededForBoot = true;
         options = [ "noatime" ];

@@ -12,8 +12,7 @@ let
   writableUuids = [
     rootUuid
   ]
-  ++ lib.optional sharedPool poolUuid
-  ++ lib.optional (!sharedPool) "4bac5c02-4a89-4377-8388-ce55ef171552";
+  ++ lib.optional sharedPool poolUuid;
   led = color: ''
     echo "${color}" > /sys/class/leds/rgb:status/multi_intensity
     echo 80 > /sys/class/leds/rgb:status/brightness
@@ -121,7 +120,7 @@ in
     services.udev.extraRules = ''
       ACTION=="add|change", SUBSYSTEM=="block", ENV{DEVTYPE}=="partition", DEVPATH=="*/1d84000.ufshc/*", ${
         lib.concatMapStringsSep ", " (uuid: ''ENV{ID_FS_UUID}!="${uuid}"'') writableUuids
-      }, RUN+="${pkgs.util-linux}/bin/blockdev --setro $devnode"
+      }, ENV{ID_PART_ENTRY_NAME}!="home", RUN+="${pkgs.util-linux}/bin/blockdev --setro $devnode"
       ACTION=="add|change", SUBSYSTEM=="block", KERNEL=="mmcblk*", RUN+="${pkgs.util-linux}/bin/blockdev --setro $devnode"
     '';
     systemd.generators.systemd-gpt-auto-generator = "/dev/null";
