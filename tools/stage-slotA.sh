@@ -6,7 +6,7 @@ o=$(build image)
 mkdir -p "$stage"
 cd "$stage"
 zstd -q -d --sparse "$o/frame-nixos-usb.img.zst" -o full.img
-dd if=full.img of=rootfs.img bs=512 skip=655394 count=10485760 conv=sparse status=none
+dd if=full.img of=rootfs.img bs=512 skip=655394 count=20971520 conv=sparse status=none
 rm full.img
 total=$(btrfs inspect-internal dump-super rootfs.img | awk '$1 == "total_bytes" { print $2 }')
 truncate -s "$total" rootfs.img
