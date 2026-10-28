@@ -17,7 +17,7 @@ This is a spike. The original slot-A layout was verified on one Frame on 2026-09
 - `frame.storage.slotAUuid`: slot A's filesystem, which the images format with the default.
 - `frame.buildSystem`: the system that cross-compiles the kernel, `x86_64-linux` by default.
 - `frame.session.fhsPackages`: packages added to `frame-fhs`, the FHS environment Steam runs in; their desktop entries appear in Steam's + menu. A module that runs something in the session takes the `frameSession` module argument: `inFhs` wraps a command in `frame-fhs`, and `valveMesaEnv` and `mesavars` give it Valve's Mesa.
-- `frame.wivrn.enable` and `frame.framecorder.enable`: the optional apps described below, off by default.
+- `frame.wivrn.enable`, `frame.framecorder.enable` and `frame.framecolor.enable`: the optional apps described below, off by default.
 
 `modules/` holds the modules and `pkgs/` Valve's packages. `nixosConfigurations.frame-slotA` and `frame-recovery` are the bring-up systems the images carry, with nothing optional enabled.
 
@@ -108,6 +108,17 @@ To boot NixOS, hold Power until the LED goes off, then power on while holding AU
 - The update check in framecorder's apps fails, since `framecorder-setup` is not installed.
 - **Verified:** on the Frame on 2026-10-03. The tab registers with SteamVR, and `framecorder --duration 6` read the panels through `framecorder-grab@.service` and saved 1920x1080 HEVC at 72 fps with no dropped frames, 1.26 ms of GPU per frame, and a game-audio track. A second recording, with the headset in use, shows the passthrough view. `framecorder-sync` listens on 38619.
 - **Not verified:** the tab's controls in the headset, the mic and pairing a sync device.
+
+## framecolor-sharp
+
+`frame.framecolor.enable` adds [framecolor-sharp](https://github.com/guix8/framecolor-sharp) at `bb6ac2e`: a vkBasalt layer in vrcompositor that corrects colour with a LUT and sharpens with CAS, and a SteamVR dashboard overlay that tunes both. Nix replaces its installer, which puts everything in the home directory.
+
+- `framecolorctl enable` turns it on: it copies the layer's manifest to `~/.local/share/framecolor/layer/`, enables `framecolor.service` (the overlay) and restarts SteamVR. `framecolorctl disable` turns both off and restarts SteamVR. Run it before switching the option off, or `~/.config/systemd/user/steamvr.service.wants/` keeps a link to the removed unit.
+- `steamvr.service` gets the layer's environment and upstream's startup guard: if SteamVR fails within 10 s of starting with the layer on, the guard moves the manifest aside. `framecolorctl guard 3` allows three failures first.
+- The layer rereads `~/.config/framecolor/current.txt`, which the overlay writes, every 50 ms, so changes show without a restart.
+- The overlay and `framecolorctl` run in `frame-fhs`, since both load SteamVR's client library from `/opt/steamvr`. `framecolorctl bench` and `bench --compare A B` measure vrcompositor's GPU time.
+- Only the Regular and Bold Noto CJK fonts the overlay draws with are copied into the package.
+- **Not verified:** anything on the Frame.
 
 ## SteamOS Manager and the power button
 

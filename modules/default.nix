@@ -7,6 +7,7 @@
     ./audio.nix
     ./wivrn.nix
     ./framecorder.nix
+    ./framecolor.nix
     ./steamos-manager.nix
     ./powerbuttond.nix
   ];
