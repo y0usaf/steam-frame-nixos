@@ -141,7 +141,7 @@ in
 
     systemd.user.services.steamvr = {
       environment = {
-        VK_ADD_IMPLICIT_LAYER_PATH = "%h/.local/share/framecolor/layer";
+        VK_IMPLICIT_LAYER_PATH = lib.mkForce "${frameSession.valveMesaEnv.VK_IMPLICIT_LAYER_PATH}:%h/.local/share/framecolor/layer";
         ENABLE_VKBASALT = "1";
         VKBASALT_CONFIG_FILE = "${framecolor}/share/framecolor/vkBasalt.conf";
         VKBASALT_LOG_LEVEL = "warn";
