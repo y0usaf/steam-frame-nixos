@@ -5,7 +5,7 @@
   ...
 }:
 let
-  valve = pkgs.callPackage ./valve.nix { };
+  valve = pkgs.callPackage ../pkgs/valve.nix { };
   wireplumberRules = pkgs.runCommand "deckard-wireplumber-alsa" { } ''
     mkdir -p $out/share/wireplumber/wireplumber.conf.d
     for f in 50-alsa-config 51-alsa-disable; do

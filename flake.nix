@@ -10,18 +10,18 @@
           rootUuid = bootUuid;
         };
         modules = [
-          ./frame.nix
-          ./boot-loader.nix
-          ./hardware.nix
-          ./session.nix
-          ./audio.nix
-          ./wivrn.nix
+          ./modules/frame.nix
+          ./modules/boot-loader.nix
+          ./modules/hardware.nix
+          ./modules/session.nix
+          ./modules/audio.nix
+          ./modules/wivrn.nix
           ./stremio.nix
           ./omarchy.nix
-          ./framecorder.nix
+          ./modules/framecorder.nix
           ./beat-saber.nix
-          ./steamos-manager.nix
-          ./powerbuttond.nix
+          ./modules/steamos-manager.nix
+          ./modules/powerbuttond.nix
         ];
       };
       frame = slotA.extendModules {
@@ -38,10 +38,10 @@
       recovery = nixpkgs.lib.nixosSystem {
         specialArgs.rootUuid = bootUuid;
         modules = [
-          ./frame.nix
-          ./boot-loader.nix
-          ./hardware.nix
-          ./recovery.nix
+          ./modules/frame.nix
+          ./modules/boot-loader.nix
+          ./modules/hardware.nix
+          ./modules/recovery.nix
         ];
       };
     in
@@ -62,7 +62,7 @@
         };
         wivrn-server = nixpkgs.legacyPackages.x86_64-linux.wivrn;
         deckard-kernel =
-          (import ./kernel.nix {
+          (import ./pkgs/kernel.nix {
             pkgs = nixpkgs.legacyPackages.x86_64-linux;
           }).kernel;
       };

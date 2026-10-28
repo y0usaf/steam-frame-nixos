@@ -5,7 +5,7 @@
   ...
 }:
 let
-  valve = pkgs.callPackage ./valve.nix { };
+  valve = pkgs.callPackage ../pkgs/valve.nix { };
   mesavars = "${valve.steamvrSession}/share/deckard/mesavars.sh";
   valveMesaEnv = {
     VK_DRIVER_FILES = "/usr/share/vulkan/icd.d/freedreno_icd.aarch64.json";

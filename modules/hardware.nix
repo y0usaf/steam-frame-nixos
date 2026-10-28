@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  valve = pkgs.callPackage ./valve.nix { };
+  valve = pkgs.callPackage ../pkgs/valve.nix { };
   python = pkgs.python3.withPackages (p: [ p.pyyaml ]);
   fancontrol = "${python}/bin/python ${valve.fanControl}/share/deckard-fan-control/fancontrol.py";
   runtimeDir = name: {

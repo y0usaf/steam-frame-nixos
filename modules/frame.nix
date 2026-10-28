@@ -6,7 +6,7 @@
   ...
 }:
 let
-  valve = pkgs.callPackage ./valve.nix { };
+  valve = pkgs.callPackage ../pkgs/valve.nix { };
   poolUuid = config.frame.storage.poolUuid;
   sharedPool = poolUuid != null;
   writableUuids = [
@@ -36,8 +36,8 @@ in
 
   options.frame.authorizedKeys = lib.mkOption {
     type = lib.types.listOf lib.types.str;
-    default = lib.optionals (builtins.pathExists ./authorized_keys) (
-      lib.filter (line: line != "") (lib.splitString "\n" (builtins.readFile ./authorized_keys))
+    default = lib.optionals (builtins.pathExists ../authorized_keys) (
+      lib.filter (line: line != "") (lib.splitString "\n" (builtins.readFile ../authorized_keys))
     );
     description = "SSH public keys allowed to log in as root and steamos. Defaults to the lines of the gitignored authorized_keys file when it exists.";
   };
@@ -58,7 +58,7 @@ in
     system.stateVersion = "26.05";
 
     boot.loader.grub.enable = false;
-    boot.kernelPackages = import ./kernel.nix {
+    boot.kernelPackages = import ../pkgs/kernel.nix {
       pkgs = import pkgs.path { system = config.frame.buildSystem; };
     };
     hardware.deviceTree.enable = false;

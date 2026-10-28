@@ -6,7 +6,7 @@ let
     pname = "steamos-powerbuttond";
     inherit version;
     src =
-      (pkgs.callPackage ./valve.nix { }).bundleSource "steamos-powerbuttond-${version}-5.src.tar.gz"
+      (pkgs.callPackage ../pkgs/valve.nix { }).bundleSource "steamos-powerbuttond-${version}-5.src.tar.gz"
         "sha256-jCRcGsO35nXakC5qPv0vQ8XX7i7H8idAngP7xqLrD8Y="
         "steamos-powerbuttond"
         "4403691ccffdbb85a9a0de6d9348b3d777d078d7";

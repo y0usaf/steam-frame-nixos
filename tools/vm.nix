@@ -5,7 +5,7 @@ in
 (flake.inputs.nixpkgs.lib.nixosSystem {
   specialArgs.rootUuid = "47e26947-1018-45a7-95ae-4516d0bcf929";
   modules = [
-    "${spike}/frame.nix"
+    "${spike}/modules/frame.nix"
     (
       { lib, pkgs, ... }:
       {

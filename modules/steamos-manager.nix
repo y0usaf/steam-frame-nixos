@@ -2,7 +2,7 @@
 let
   version = "26.4.1";
   src =
-    (pkgs.callPackage ./valve.nix { }).bundleSource "steamos-manager-${version}-5.src.tar.gz"
+    (pkgs.callPackage ../pkgs/valve.nix { }).bundleSource "steamos-manager-${version}-5.src.tar.gz"
       "sha256-BT9icR1kfmsmnYHdopWHbkx1i27bOBOAJpU+SDpHu0A="
       "steamos-manager-${version}"
       "304a0816d6f6373d0c83fc5636f29b6df5e2838a";
