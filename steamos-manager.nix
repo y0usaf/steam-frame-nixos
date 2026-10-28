@@ -16,6 +16,8 @@ let
     postPatch = ''
       substituteInPlace $(grep -rl /usr/share/steamos-manager --include=*.rs .) \
         --replace-fail /usr/share/steamos-manager $out/share/steamos-manager
+      substituteInPlace data/devices/steam-frame.toml \
+        --replace-fail 'dt.present = ["board-info/board_revision"]' 'dt.present = ["fpga"]'
     '';
 
     nativeBuildInputs = with pkgs; [
