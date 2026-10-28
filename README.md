@@ -14,9 +14,9 @@ This is a spike. The original slot-A layout was verified on one Frame on 2026-09
 
 - `valve/esp/` and `valve/efi-A/`: the `esp` and `efi-A` partitions of Valve's recovery image. Only the USB image needs these.
 
-`authorized_keys` (also gitignored) holds the SSH public keys allowed to log in as root and `steamos`.
+`authorized_keys` (also gitignored) holds the SSH public keys allowed to log in as root and `steamos`. It is the default of `frame.authorizedKeys`; a configuration that sets that option builds without the file, so the `frame` system also builds from a plain git checkout.
 
-Everything else is fetched and pinned by hash. The builds use `path:` flake refs so that these git-ignored files are visible.
+Everything else is fetched and pinned by hash. The image builds use `path:` flake refs so that these git-ignored files are visible.
 
 ## Sources
 

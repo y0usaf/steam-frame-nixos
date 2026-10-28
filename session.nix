@@ -317,7 +317,7 @@ in
       "networkmanager"
     ]
     ++ deviceGroups;
-    openssh.authorizedKeys.keyFiles = [ ./authorized_keys ];
+    openssh.authorizedKeys.keys = config.frame.authorizedKeys;
   };
 
   services.udev.packages = [ valveUdev ];

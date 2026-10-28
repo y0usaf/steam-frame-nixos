@@ -34,11 +34,23 @@ in
     description = "System that cross-compiles the kernel.";
   };
 
+  options.frame.authorizedKeys = lib.mkOption {
+    type = lib.types.listOf lib.types.str;
+    default = lib.optionals (builtins.pathExists ./authorized_keys) (
+      lib.filter (line: line != "") (lib.splitString "\n" (builtins.readFile ./authorized_keys))
+    );
+    description = "SSH public keys allowed to log in as root and steamos. Defaults to the lines of the gitignored authorized_keys file when it exists.";
+  };
+
   config = {
     assertions = [
       {
         assertion = poolUuid == null || lib.toLower poolUuid != lib.toLower rootUuid;
         message = "The Frame storage pool UUID must differ from the slot-A boot filesystem UUID.";
+      }
+      {
+        assertion = config.frame.authorizedKeys != [ ];
+        message = "frame.authorizedKeys is empty, so no SSH key could log in to the Frame.";
       }
     ];
 
@@ -153,7 +165,7 @@ in
       settings.PasswordAuthentication = false;
       settings.KbdInteractiveAuthentication = false;
     };
-    users.users.root.openssh.authorizedKeys.keyFiles = [ ./authorized_keys ];
+    users.users.root.openssh.authorizedKeys.keys = config.frame.authorizedKeys;
 
     systemd.services.frame-led-ready = {
       wantedBy = [ "multi-user.target" ];
