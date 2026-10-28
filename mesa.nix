@@ -1,6 +1,7 @@
 {
   lib,
   stdenv,
+  fetchurl,
   fetchFromGitHub,
   meson,
   ninja,
@@ -51,7 +52,15 @@ stdenv.mkDerivation {
     hash = "sha256-GBQTV3mV/BxviMicVbLsMt+SM4cp5GEe3BQHUXD8xFU=";
   };
 
-  postPatch = "patchShebangs .";
+  perfettoSdk = fetchurl {
+    url = "https://github.com/google/perfetto/releases/download/v56.1/perfetto-cpp-sdk-src.zip";
+    hash = "sha256-kTja0as5BIph0zM+DC6/MqdJftReO32qXzoCwUdIrzg=";
+  };
+
+  postPatch = ''
+    patchShebangs .
+    install -Dm444 $perfettoSdk subprojects/packagecache/perfetto-cpp-sdk-src-v56.1.zip
+  '';
 
   strictDeps = true;
   separateDebugInfo = true;
@@ -70,7 +79,7 @@ stdenv.mkDerivation {
     "-Dplatforms=x11,wayland"
     "-Dtools=freedreno,drm-shim"
     "-Dgpuvis=true"
-    "-Dperfetto=false"
+    "-Dperfetto=true"
     "-Dvalgrind=enabled"
     "-Dllvm=disabled"
     "-Dlibunwind=disabled"
@@ -79,7 +88,7 @@ stdenv.mkDerivation {
     "-Dandroid-libperfetto=disabled"
     "-Dgallium-va=disabled"
     "-Dgallium-mediafoundation=disabled"
-    "-Dtu-build-id="
+    "-Dtu-build-id=75d098cb335991907a47f0b82a3a763f4fa714fb"
     "-Dc_args=-march=armv8.2-a"
     "-Dcpp_args=-march=armv8.2-a"
   ];
