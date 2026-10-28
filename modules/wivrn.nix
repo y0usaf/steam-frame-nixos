@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   frameSession,
@@ -135,23 +136,27 @@ let
   };
 in
 {
-  system.build.wivrnClient = wivrn;
+  options.frame.wivrn.enable = lib.mkEnableOption "the WiVRn client, listed in Steam's + menu";
 
-  frame.session.fhsPackages = [
-    wivrn
-    desktopItem
-  ];
+  config = lib.mkIf config.frame.wivrn.enable {
+    system.build.wivrnClient = wivrn;
 
-  systemd.user.services.wivrn-client = {
-    description = "WiVRn client";
-    bindsTo = [ "steamvr.service" ];
-    after = [ "steamvr.service" ];
-    environment = frameSession.valveMesaEnv;
-    serviceConfig = {
-      Slice = "session.slice";
-      EnvironmentFile = frameSession.mesavars;
-      ExecStart = frameSession.inFhs "${wivrn}/bin/wivrn";
-      TimeoutStopSec = 10;
+    frame.session.fhsPackages = [
+      wivrn
+      desktopItem
+    ];
+
+    systemd.user.services.wivrn-client = {
+      description = "WiVRn client";
+      bindsTo = [ "steamvr.service" ];
+      after = [ "steamvr.service" ];
+      environment = frameSession.valveMesaEnv;
+      serviceConfig = {
+        Slice = "session.slice";
+        EnvironmentFile = frameSession.mesavars;
+        ExecStart = frameSession.inFhs "${wivrn}/bin/wivrn";
+        TimeoutStopSec = 10;
+      };
     };
   };
 }

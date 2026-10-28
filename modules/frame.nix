@@ -2,11 +2,11 @@
   config,
   lib,
   pkgs,
-  rootUuid,
   ...
 }:
 let
   valve = pkgs.callPackage ../pkgs/valve.nix { };
+  rootUuid = config.frame.storage.slotAUuid;
   poolUuid = config.frame.storage.poolUuid;
   sharedPool = poolUuid != null;
   writableUuids = [
@@ -28,6 +28,12 @@ in
     description = "UUID of the shared Btrfs storage pool, or null to keep root on slot A.";
   };
 
+  options.frame.storage.slotAUuid = lib.mkOption {
+    type = lib.types.str;
+    default = "47e26947-1018-45a7-95ae-4516d0bcf929";
+    description = "UUID of slot A's Btrfs filesystem, which carries the boot files. The images format slot A with it.";
+  };
+
   options.frame.buildSystem = lib.mkOption {
     type = lib.types.str;
     default = "x86_64-linux";
@@ -36,10 +42,8 @@ in
 
   options.frame.authorizedKeys = lib.mkOption {
     type = lib.types.listOf lib.types.str;
-    default = lib.optionals (builtins.pathExists ../authorized_keys) (
-      lib.filter (line: line != "") (lib.splitString "\n" (builtins.readFile ../authorized_keys))
-    );
-    description = "SSH public keys allowed to log in as root and steamos. Defaults to the lines of the gitignored authorized_keys file when it exists.";
+    default = [ ];
+    description = "SSH public keys allowed to log in as root and steamos.";
   };
 
   config = {

@@ -3,11 +3,11 @@
   lib,
   pkgs,
   utils,
-  rootUuid,
   ...
 }:
 let
   valve = pkgs.callPackage ../pkgs/valve.nix { };
+  rootUuid = config.frame.storage.slotAUuid;
   slotA = "/dev/disk/by-uuid/${rootUuid}";
   slotADevice = "${utils.escapeSystemdPath slotA}.device";
   reboot = "${config.boot.initrd.systemd.package}/bin/systemctl --force reboot";

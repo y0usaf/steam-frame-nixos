@@ -1,4 +1,6 @@
 {
+  config,
+  lib,
   pkgs,
   frameSession,
   ...
@@ -59,69 +61,73 @@ let
   };
 in
 {
-  system.build.framecorder = framecorder;
+  options.frame.framecorder.enable = lib.mkEnableOption "framecorder, which records the panels from a SteamVR dashboard tab";
 
-  frame.session.fhsPackages = [
-    framecorder
-    desktopItem
-  ];
+  config = lib.mkIf config.frame.framecorder.enable {
+    system.build.framecorder = framecorder;
 
-  systemd.sockets.framecorder-grab = {
-    description = "framecorder panel helper";
-    wantedBy = [ "sockets.target" ];
-    socketConfig = {
-      ListenStream = grabSocket;
-      Accept = true;
-      SocketUser = "steamos";
-      SocketMode = "0600";
+    frame.session.fhsPackages = [
+      framecorder
+      desktopItem
+    ];
+
+    systemd.sockets.framecorder-grab = {
+      description = "framecorder panel helper";
+      wantedBy = [ "sockets.target" ];
+      socketConfig = {
+        ListenStream = grabSocket;
+        Accept = true;
+        SocketUser = "steamos";
+        SocketMode = "0600";
+      };
     };
-  };
 
-  systemd.services."framecorder-grab@" = {
-    description = "framecorder panel helper";
-    serviceConfig = {
-      ExecStart = "${framecorder}/bin/framecorder-grab ${card}";
-      StandardInput = "socket";
-      StandardOutput = "journal";
-      StandardError = "journal";
-      User = "steamos";
-      AmbientCapabilities = "CAP_SYS_ADMIN";
-      CapabilityBoundingSet = "CAP_SYS_ADMIN";
-      DevicePolicy = "closed";
-      DeviceAllow = "${card} rw";
+    systemd.services."framecorder-grab@" = {
+      description = "framecorder panel helper";
+      serviceConfig = {
+        ExecStart = "${framecorder}/bin/framecorder-grab ${card}";
+        StandardInput = "socket";
+        StandardOutput = "journal";
+        StandardError = "journal";
+        User = "steamos";
+        AmbientCapabilities = "CAP_SYS_ADMIN";
+        CapabilityBoundingSet = "CAP_SYS_ADMIN";
+        DevicePolicy = "closed";
+        DeviceAllow = "${card} rw";
+      };
     };
-  };
 
-  systemd.user.services.framecorder-ui = {
-    description = "framecorder dashboard tab";
-    bindsTo = [ "steamvr.service" ];
-    after = [ "steamvr.service" ];
-    wantedBy = [ "steamvr.service" ];
-    environment = frameSession.valveMesaEnv;
-    serviceConfig = {
-      Slice = "session.slice";
-      Nice = 5;
-      Restart = "on-failure";
-      RestartSec = 5;
-      EnvironmentFile = frameSession.mesavars;
-      ExecStart = frameSession.inFhs "${framecorder}/bin/framecorder-ui";
+    systemd.user.services.framecorder-ui = {
+      description = "framecorder dashboard tab";
+      bindsTo = [ "steamvr.service" ];
+      after = [ "steamvr.service" ];
+      wantedBy = [ "steamvr.service" ];
+      environment = frameSession.valveMesaEnv;
+      serviceConfig = {
+        Slice = "session.slice";
+        Nice = 5;
+        Restart = "on-failure";
+        RestartSec = 5;
+        EnvironmentFile = frameSession.mesavars;
+        ExecStart = frameSession.inFhs "${framecorder}/bin/framecorder-ui";
+      };
     };
-  };
 
-  systemd.user.services.framecorder-sync = {
-    description = "framecorder Wi-Fi sync";
-    wantedBy = [ "default.target" ];
-    unitConfig.ConditionUser = "steamos";
-    serviceConfig = {
-      Slice = "session.slice";
-      Nice = 10;
-      IOSchedulingClass = "idle";
-      MemoryHigh = "64M";
-      Restart = "on-failure";
-      RestartSec = 5;
-      ExecStart = "${sync}/bin/framecorder-sync";
+    systemd.user.services.framecorder-sync = {
+      description = "framecorder Wi-Fi sync";
+      wantedBy = [ "default.target" ];
+      unitConfig.ConditionUser = "steamos";
+      serviceConfig = {
+        Slice = "session.slice";
+        Nice = 10;
+        IOSchedulingClass = "idle";
+        MemoryHigh = "64M";
+        Restart = "on-failure";
+        RestartSec = 5;
+        ExecStart = "${sync}/bin/framecorder-sync";
+      };
     };
-  };
 
-  networking.firewall.allowedTCPPorts = [ 38619 ];
+    networking.firewall.allowedTCPPorts = [ 38619 ];
+  };
 }
