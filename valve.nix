@@ -294,6 +294,23 @@ in
     '';
   };
 
+  fexGuestRoot =
+    runCommand "deckard-fex-guest-root-26.3.0-devel+gite07916b4"
+      {
+        srcs = [
+          (fetchPkg "deckard-mesa-linux-deps-x86_64-20260820-4-aarch64.pkg.tar.zst" "sha256-kcoQ7YHjPcOAHnlVBpSGKOWkgjO+qrkRtPMERsc2hGc=")
+          (fetchPkg "deckard-mesa-linux-x86_64-26.3.0_devel+gite07916b4-5-aarch64.pkg.tar.zst" "sha256-c1jFr5KjtBC2vqSgZ07Biu/CsnfTq9zVUNge/r3Xq2A=")
+          (fetchPkg "deckard-gamescope-layer-x86_64-3.16.30-4-aarch64.pkg.tar.zst" "sha256-OS+Q9M02UumSWBa81L0kPOmZi480jeVV4EyGlHt7x4Y=")
+        ];
+        nativeBuildInputs = [ zstd ];
+      }
+      ''
+        for src in $srcs; do
+          tar --zstd -xf $src usr/share/guestos/fex-mesa
+        done
+        mv usr/share/guestos/fex-mesa $out
+      '';
+
   firmware =
     runCommand "linux-firmware-deckard-20261023.1"
       {

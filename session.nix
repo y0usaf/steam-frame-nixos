@@ -151,10 +151,12 @@ let
       ]);
     extraBwrapArgs = [
       "--ro-bind ${valve.steamvr}/opt/steamvr /opt/steamvr"
+      "--ro-bind ${valve.fexGuestRoot} /usr/share/guestos/fex-mesa"
       "--bind /tmp/.X11-unix /tmp/.X11-unix"
     ];
     extraBuildCommands = ''
       ln -sfn ${valve.hwSupportTree}/local $out/usr/local
+      mkdir -p $out/usr/share/guestos/fex-mesa
       rm $out/usr/share/applications/org.freedesktop.IBus.Setup.desktop
     '';
     profile = "export PATH=/usr/local/bin:/usr/local/sbin:$PATH";
