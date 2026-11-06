@@ -6,7 +6,8 @@
     let
       inherit (nixpkgs) lib;
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      keys = {
+      bringUp = {
+        system.stateVersion = "26.05";
         frame.authorizedKeys = lib.optionals (builtins.pathExists ./authorized_keys) (
           lib.filter (line: line != "") (lib.splitString "\n" (builtins.readFile ./authorized_keys))
         );
@@ -14,16 +15,13 @@
       slotA = lib.nixosSystem {
         modules = [
           self.nixosModules.default
-          keys
+          bringUp
         ];
       };
       recovery = lib.nixosSystem {
         modules = [
-          ./modules/frame.nix
-          ./modules/boot-loader.nix
-          ./modules/hardware.nix
-          ./modules/recovery.nix
-          keys
+          self.nixosModules.recovery
+          bringUp
         ];
       };
       image =
@@ -34,7 +32,14 @@
         };
     in
     {
-      nixosModules.default = ./modules;
+      nixosModules = {
+        default = ./modules;
+        recovery = ./modules/recovery-system.nix;
+      };
+      templates.default = {
+        path = ./example;
+        description = "A Steam Frame system built from nixosModules.default";
+      };
       nixosConfigurations = {
         frame-slotA = slotA;
         frame-recovery = recovery;

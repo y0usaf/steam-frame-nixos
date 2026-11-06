@@ -9,6 +9,7 @@ in
       { lib, pkgs, ... }:
       {
         frame.authorizedKeys = flake.nixosConfigurations.frame-slotA.config.frame.authorizedKeys;
+        system.stateVersion = "26.05";
         boot.kernelPackages = lib.mkForce pkgs.linuxPackages;
         boot.initrd.availableKernelModules = lib.mkForce [
           "virtio_pci"

@@ -1,7 +1,7 @@
 repo=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 host=${FRAME_HOST:?set FRAME_HOST to the address of the Frame}
-ssh_opts="-i $HOME/.ssh/id_rsa_frame -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=error -o ConnectTimeout=10 -o ControlMaster=no -o ControlPath=none"
-stage=${XDG_RUNTIME_DIR:?}/agent/frame-nixos
+ssh_opts="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=error -o ConnectTimeout=10 -o ControlMaster=no -o ControlPath=none"
+stage=${XDG_RUNTIME_DIR:?}/frame-nixos
 
 qemu_store() {
   local i

@@ -10,7 +10,9 @@ This is a spike. The original slot-A layout was verified on one Frame on 2026-09
 
 ## Use as a module
 
-`nixosModules.default` makes a NixOS system a Frame: Valve's kernel, Mesa and firmware, the hardware services, the slot-A boot hook, the VR session, steamos-manager and powerbuttond. Build the system with this flake's nixpkgs (`inputs.nixpkgs`), the pin Valve's sources are built and verified against. Options:
+`nixosModules.default` makes a NixOS system a Frame: Valve's kernel, Mesa and firmware, the hardware services, the slot-A boot hook, the VR session, steamos-manager and powerbuttond. `nixosModules.recovery` is the minimal system `frame-recovery` is built from: the kernel, firmware, boot hook, hardware services and migration tools, with no VR session. Build the system with this flake's nixpkgs (`inputs.nixpkgs`), the pin Valve's sources are built and verified against.
+
+`nix flake init -t github:y0usaf/steam-frame-nixos` copies `example/` into the current directory: a flake with `nixosConfigurations.frame`, and a `configuration.nix` to fill in with your SSH key. The owner's configuration sets `system.stateVersion`, and may set `networking.hostName` (default `frame-nixos`). Options:
 
 - `frame.authorizedKeys`: SSH public keys for root and `steamos`. The build fails while it is empty.
 - `frame.storage.poolUuid`: the shared Btrfs pool below; null keeps root on slot A.
@@ -28,6 +30,8 @@ This is a spike. The original slot-A layout was verified on one Frame on 2026-09
 - `valve/esp/` and `valve/efi-A/`: the `esp` and `efi-A` partitions of Valve's recovery image. Only the USB image needs these.
 
 `authorized_keys` (also gitignored) holds the SSH public keys the bring-up systems let log in as root and `steamos`. A system built from `nixosModules.default` sets `frame.authorizedKeys` itself and builds from a plain git checkout.
+
+The tools reach the Frame at `FRAME_HOST` with your SSH configuration, so the key for it goes in `~/.ssh/config` or the agent.
 
 Everything else is fetched and pinned by hash. The image builds use `path:` flake refs so that these git-ignored files are visible.
 

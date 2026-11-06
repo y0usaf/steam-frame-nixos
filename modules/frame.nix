@@ -59,7 +59,6 @@ in
     ];
 
     nixpkgs.hostPlatform = "aarch64-linux";
-    system.stateVersion = "26.05";
 
     boot.loader.grub.enable = false;
     boot.kernelPackages = import ../pkgs/kernel.nix {
@@ -149,7 +148,7 @@ in
     '';
     systemd.generators.systemd-gpt-auto-generator = "/dev/null";
 
-    networking.hostName = "frame-nixos";
+    networking.hostName = lib.mkDefault "frame-nixos";
     networking.useDHCP = false;
     networking.networkmanager = {
       enable = true;
