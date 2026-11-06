@@ -6,6 +6,7 @@
     let
       inherit (nixpkgs) lib;
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      hasKeys = builtins.pathExists ./authorized_keys;
       bringUp = {
         system.stateVersion = "26.05";
         frame.authorizedKeys = lib.optionals (builtins.pathExists ./authorized_keys) (
@@ -40,15 +41,17 @@
         path = ./example;
         description = "A Steam Frame system built from nixosModules.default";
       };
-      nixosConfigurations = {
+      nixosConfigurations = lib.optionalAttrs hasKeys {
         frame-slotA = slotA;
         frame-recovery = recovery;
       };
       packages.x86_64-linux = {
-        image = image slotA;
-        recovery-image = image recovery;
         wivrn-server = pkgs.wivrn;
         deckard-kernel = (import ./pkgs/kernel.nix { inherit pkgs; }).kernel;
+      }
+      // lib.optionalAttrs hasKeys {
+        image = image slotA;
+        recovery-image = image recovery;
       };
     };
 }
