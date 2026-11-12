@@ -232,6 +232,16 @@ let
     echo > /sys/bus/spi/devices/spi0.1/driver_override
   '';
 
+  ledSleep = pkgs.writeShellScript "ledcontrol-sleep" ''
+    run=/run/deckardcharger
+    mkdir -p "$run"
+    echo -n "" > "$run/power_event" || true
+    case "${"$"}1" in
+      pre) echo suspend > "$run/power_event" || true ;;
+      post) echo resume > "$run/power_event" || true ;;
+    esac
+  '';
+
   codecNodes = pkgs.writeShellScript "steam-video-codec-setup" ''
     set -eu
     ln -sfn "$(vrdevice_path video_decode)" /dev/video-dec0
@@ -473,12 +483,30 @@ in
     after = [ "local-fs.target" ];
     wantedBy = [ "multi-user.target" ];
     restartIfChanged = false;
+    unitConfig.Conflicts = [ "suspend.target" ];
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
       ExecStartPre = inFhs "/usr/lib/deckard-fpga/fpga_power_en.sh";
       ExecStart = inFhs "/usr/lib/deckard-fpga/fpga_load.sh";
+      ExecStop = inFhs "/usr/lib/deckard-fpga/fpga_power_disable.sh";
     };
+  };
+
+  systemd.services.deckard-fpga-resume = {
+    description = "Repower the FPGA after resume";
+    after = [ "suspend.target" ];
+    wantedBy = [ "suspend.target" ];
+    restartIfChanged = false;
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${config.systemd.package}/bin/systemctl start deckard-fpga";
+    };
+  };
+
+  environment.etc."systemd/system-sleep/00-ledcontrol.sh" = {
+    source = ledSleep;
+    mode = "0755";
   };
 
   systemd.services.dsp_service = {
