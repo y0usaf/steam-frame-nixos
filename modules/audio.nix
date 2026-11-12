@@ -6,12 +6,6 @@
 }:
 let
   valve = pkgs.callPackage ../pkgs/valve.nix { };
-  wireplumberRules = pkgs.runCommand "deckard-wireplumber-alsa" { } ''
-    mkdir -p $out/share/wireplumber/wireplumber.conf.d
-    for f in 50-alsa-config 51-alsa-disable; do
-      install -m644 ${valve.audioConfig}/etc/wireplumber/wireplumber.conf.d/$f.conf $out/share/wireplumber/wireplumber.conf.d/
-    done
-  '';
   amixer = "${pkgs.alsa-utils}/bin/amixer";
   mute = [
     "${amixer} -cLPASS sset 'Speaker Left Digital' 0"
@@ -47,6 +41,10 @@ let
       ]
     } $out/lib/lv2/*/*.so
   '';
+  wireplumberRules = pkgs.runCommand "deckard-wireplumber" { } ''
+    mkdir -p $out/share/wireplumber/wireplumber.conf.d
+    install -m644 ${valve.audioConfig}/etc/wireplumber/wireplumber.conf.d/*.conf $out/share/wireplumber/wireplumber.conf.d/
+  '';
   speakerChains = pkgs.runCommand "deckard-speaker-chains" { } ''
     for c in denver boulder; do
       mkdir -p $out/$c/pipewire/filter-chain.conf.d
@@ -56,6 +54,17 @@ let
 in
 {
   services.pipewire.wireplumber.configPackages = [ wireplumberRules ];
+  environment.etc."wireplumber/scripts/microphone-tracker.lua".source =
+    "${valve.audioConfig}/etc/wireplumber/scripts/microphone-tracker.lua";
+  environment.etc."wireplumber/scripts/spatial-node-config.lua".source =
+    "${valve.audioConfig}/etc/wireplumber/scripts/spatial-node-config.lua";
+
+  services.pipewire.configPackages = [
+    (pkgs.runCommand "deckard-pipewire-access" { } ''
+      install -Dm644 ${valve.audioConfig}/etc/pipewire/pipewire.conf.d/module-access-args.conf \
+        $out/share/pipewire/pipewire.conf.d/10-module-access-args.conf
+    '')
+  ];
   services.pipewire.wireplumber.extraConfig."10-frame-no-video-monitors"."wireplumber.profiles".main =
     {
       "monitor.libcamera" = "disabled";
