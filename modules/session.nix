@@ -637,6 +637,7 @@ in
     after = [ "steamvr.service" ];
     restartIfChanged = false;
     environment = valveMesaEnv // {
+      WINE_CPU_TOPOLOGY = "8:0,1,2,3,4,5,6,7";
       STEAM_LAUNCH_WRAPPER_AFFINITY_LIST = "0xf8";
       STEAM_DESKTOP_APP_AFFINITY_LIST = "0xf8";
       STEAM_LAUNCH_WRAPPER_SCOPE = "true";
