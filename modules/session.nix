@@ -86,6 +86,7 @@ let
         ffmpeg_7.lib
         brotli.lib
         bzip2.out
+        bluez
         cairo
         cups.lib
         expat
@@ -97,6 +98,7 @@ let
         glib
         glew
         harfbuzz
+        iproute2
         ibus
         libjpeg_turbo
         mtdev
@@ -439,6 +441,24 @@ in
       RemainAfterExit = true;
       TimeoutStartSec = "30s";
       ExecStart = inFhs "/usr/lib/deckard-hw-support/set_mac_addresses.sh --wifi";
+    };
+  };
+
+  systemd.services.set-bluetooth-mac-address = {
+    description = "Set Bluetooth MAC address from the EEPROM";
+    after = [
+      "sys-subsystem-bluetooth-devices-hci0.device"
+      "bluetooth.service"
+    ];
+    requires = [ "sys-subsystem-bluetooth-devices-hci0.device" ];
+    wantedBy = [ "multi-user.target" ];
+    restartIfChanged = false;
+    unitConfig.ConditionPathExists = "/sys/class/bluetooth/hci0";
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      TimeoutStartSec = "60s";
+      ExecStart = inFhs "/usr/lib/deckard-hw-support/set_mac_addresses.sh --bluetooth";
     };
   };
 

@@ -20,6 +20,18 @@ in
   };
   systemd.tmpfiles.packages = [ valve.hwSupportTree ];
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        MultiProfile = "multiple";
+        FastConnectable = true;
+        Privacy = "device";
+      };
+    };
+  };
+
   systemd.services.deckard-charger = {
     description = "Deckard Battery Charger service";
     unitConfig.DefaultDependencies = false;
