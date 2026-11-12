@@ -519,8 +519,42 @@ in
     wants = [
       "steamvr.service"
       "steam.service"
+      "steamvr-v4l2cam.service"
+      "steamvr-proxmicmute.service"
     ];
     unitConfig.PropagatesStopTo = "graphical-session.target";
+  };
+
+  systemd.user.services.steamvr-proxmicmute = {
+    description = "SteamVR mutes the microphone while the headset is off";
+    partOf = [ "graphical-session.target" ];
+    after = [ "steamvr.service" ];
+    restartIfChanged = false;
+    unitConfig.StartLimitIntervalSec = 0;
+    serviceConfig = {
+      Type = "simple";
+      Restart = "always";
+      RestartSec = "5s";
+      Slice = "session.slice";
+      ExecStart = inFhs "/usr/share/deckard/select_steamvr.sh bin/linuxarm64/proxmicmute";
+    };
+  };
+
+  systemd.user.services.steamvr-v4l2cam = {
+    description = "SteamVR feeds the cameras into /dev/video99";
+    partOf = [ "graphical-session.target" ];
+    after = [ "steamvr.service" ];
+    requires = [ "steamvr.service" ];
+    restartIfChanged = false;
+    unitConfig.StartLimitIntervalSec = 0;
+    serviceConfig = {
+      Type = "simple";
+      Restart = "always";
+      RestartSec = "5s";
+      Slice = "session.slice";
+      EnvironmentFile = mesavars;
+      ExecStart = inFhs "/usr/share/deckard/select_steamvr.sh bin/linuxarm64/v4l2cam --output=99";
+    };
   };
 
   systemd.user.services.gamescope-session = {
