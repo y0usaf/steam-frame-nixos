@@ -232,6 +232,12 @@ let
     echo > /sys/bus/spi/devices/spi0.1/driver_override
   '';
 
+  codecNodes = pkgs.writeShellScript "steam-video-codec-setup" ''
+    set -eu
+    ln -sfn "$(vrdevice_path video_decode)" /dev/video-dec0
+    ln -sfn "$(vrdevice_path video_encode)" /dev/video-enc0
+  '';
+
   valveUdev = pkgs.runCommand "valve-udev-rules" { } ''
     mkdir -p $out/lib/udev/rules.d
     for r in 00-usb-permissions 99-backlight 99-cdsp-permissions 99-exp5-permissions 99-gpiod-permissions \
@@ -484,6 +490,18 @@ in
       ExecStart = inFhs "/usr/share/deckard/select_steamvr.sh drivers/cv/bin/linuxarm64/dsp_service";
       Restart = "on-failure";
       RestartSec = "5s";
+    };
+  };
+
+  systemd.services.steam-video-codec-setup = {
+    description = "Point CEF's decode node and Steam Link's encode node at the iris devices";
+    wantedBy = [ "multi-user.target" ];
+    before = [ "frame-session.service" ];
+    restartIfChanged = false;
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = inFhs codecNodes;
     };
   };
 
