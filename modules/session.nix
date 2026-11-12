@@ -493,6 +493,17 @@ in
     };
   };
 
+  systemd.services.steamvr-set-kernel-thread-priorities = {
+    description = "Valve's realtime priorities for the display, GPU and controller radio threads";
+    wantedBy = [ "multi-user.target" ];
+    restartIfChanged = false;
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = inFhs "/usr/share/deckard/set_kernel_thread_priorities.sh";
+    };
+  };
+
   systemd.services.steam-video-codec-setup = {
     description = "Point CEF's decode node and Steam Link's encode node at the iris devices";
     wantedBy = [ "multi-user.target" ];
